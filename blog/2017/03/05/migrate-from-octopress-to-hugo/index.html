@@ -71,7 +71,7 @@
   <meta name="author" content="Stanislav Popov">
 
   
-  <meta name="generator" content="Hugo 0.66.0" />
+  <meta name="generator" content="Hugo 0.164.0">
 
   
   
@@ -158,7 +158,7 @@
 Оказалось, что Octopress не совместим с текущим ruby 2.4 (что намекает на то, что проект бросают).</p>
 <p>Можно было сделать песочницу с ruby 2.3 для конеретного проекта, но я с руби сталкивался мало (Vagrant, Octopress)
 и большого желания познавать его не было. Поэтому я просто переключал системную версию руби:</p>
-<pre><code>brew switch ruby 2.3.2
+<pre tabindex="0"><code>brew switch ruby 2.3.2
 </code></pre><p>После этого начинал работать Octopress, но переставал работать Vim.</p>
 <p>Пробовал скачать контейнер с Octopress, но тоже за 20 минут не разобрался, как с ним жить: внутри нет git для деплоя,
 порт для <code>rake preview</code> не открыт&hellip; нафиг.</p>
@@ -169,11 +169,11 @@
 <p>Самое приятное в этом то, что в Hugo есть live reload: страница в браузере обновляется сама при редактировании исходника.</p>
 <h2 id="установка">Установка</h2>
 <p><a href="https://github.com/codebrane/octohug">Устанавливаем</a> в систему, я сделал так:</p>
-<pre><code>brew install hugo
+<pre tabindex="0"><code>brew install hugo
 </code></pre><p>Для подсветки кода ему нужен <code>pygments</code>, ставим его:</p>
-<pre><code>pip install pygments
+<pre tabindex="0"><code>pip install pygments
 </code></pre><p>Если вы любите <a href="http://ethanschoonover.com/solarized">Solarized Dark</a> как люблю его я, ставим тему для pygments:</p>
-<pre><code>git clone https://github.com/john2x/solarized-pygment.git
+<pre tabindex="0"><code>git clone https://github.com/john2x/solarized-pygment.git
 cd solarized-pygment
 ./setup.py install
 cd ..
@@ -181,9 +181,9 @@ rm -rf solarized-pygment
 </code></pre><p>Переходим в папку, где будет новый проект. У меня блог лежал в <code>~/projects/site/blog.popstas.ru</code>,
 я заранее переименовал старый проект в <code>~/projects/site/blog.popstas.ru_octopress</code>.</p>
 <p>Создаем новый сайт:</p>
-<pre><code>hugo new site blog.popstas.ru
+<pre tabindex="0"><code>hugo new site blog.popstas.ru
 </code></pre><p>Получаем следующее:</p>
-<pre><code>$ tree blog.popstas.ru
+<pre tabindex="0"><code>$ tree blog.popstas.ru
 
 blog.popstas.ru
 ├── archetypes
@@ -194,13 +194,13 @@ blog.popstas.ru
 ├── static
 </code></pre><p>Переходим в папку нового блога.</p>
 <p>Добавляем тему. Я искал порт своей темы Octopress на Hugo и <a href="https://github.com/parsiya/Hugo-Octopress">нашел</a>:</p>
-<pre><code>mkdir themes
+<pre tabindex="0"><code>mkdir themes
 git clone https://github.com/parsiya/Hugo-Octopress octopress
 </code></pre><p>Вносим первые правки в <code>config.toml</code>:</p>
-<pre><code>baseURL = &quot;http://blog.popstas.ru/&quot;
-languageCode = &quot;ru-ru&quot;
-title = &quot;Popstas&quot;
-theme = &quot;octopress&quot;
+<pre tabindex="0"><code>baseURL = &#34;http://blog.popstas.ru/&#34;
+languageCode = &#34;ru-ru&#34;
+title = &#34;Popstas&#34;
+theme = &#34;octopress&#34;
 
 [params]
     # Keep it as false please, the css file contains the code for highlighting
@@ -208,11 +208,10 @@ theme = &quot;octopress&quot;
     
     # If nothing is set, then solarized_light is used
     # Other styles can be viewed in [http://pygments.org/](http://pygments.org/)
-    pygmentsstyle = &quot;solarized_dark&quot;
+    pygmentsstyle = &#34;solarized_dark&#34;
     
     # Highlight shortcode and code fences (```) will be treated similarly
     pygmentscodefences = true
-
 </code></pre><h2 id="перенос-контента">Перенос контента</h2>
 <p>Определим список задач:</p>
 <ul>
@@ -233,8 +232,8 @@ theme = &quot;octopress&quot;
 <p>В hugo есть только миграция с Jekyl, поэтому идем на github, ищем &ldquo;octopress hugo&rdquo; и находим <a href="https://github.com/codebrane/octohug">octohug</a>.
 Его нужно скачать, скомпилировать, скопировать в папку старого блога и запустить.</p>
 <p>После этого в корне старого блога появится папка <code>content</code>, ее нужно перенести в новый блог:</p>
-<pre><code>go get github.com/codebrane/octohug
-cd &quot;$GOPATH/src/github.com/codebrane/octohug&quot;
+<pre tabindex="0"><code>go get github.com/codebrane/octohug
+cd &#34;$GOPATH/src/github.com/codebrane/octohug&#34;
 go build
 cp octohug ~/projects/site/blog.popstas.ru_octopress
 
@@ -243,7 +242,7 @@ cd ~/projects/site/blog.popstas.ru_octopress
 
 mv content ../blog.popstas.ru
 </code></pre><p>Пора посмотреть, что получается. Переходим в папку нового блога и запускаем генератор:</p>
-<pre><code>cd ~/projects/site/blog.popstas.ru
+<pre tabindex="0"><code>cd ~/projects/site/blog.popstas.ru
 hugo serve
 </code></pre><p>Лично мне результат не понравился :) Статьи перенеслись, но с кривыми датами, заголовками и форматированием.
 Открываем оба блога в вашем редакторе и на следующие пару часов превращаемся в контентщика. Вот что правил я:</p>
@@ -258,29 +257,29 @@ hugo serve
 <li>пройтись по каждой статье и глазами найти остальные несоответствия</li>
 </ul>
 <p>Вносим правки в <code>config.toml</code>:</p>
-<pre><code>disablePathToLower = false
+<pre tabindex="0"><code>disablePathToLower = false
 paginate = 10
 
 # Make tags and categories work
 [indexes]
-    tag = &quot;tags&quot;
-    category = &quot;categories&quot;
+    tag = &#34;tags&#34;
+    category = &#34;categories&#34;
 
 [params]
     # If false, all of the post will appear on front page (and in pagination)
     truncate = true
     
-    # Author's name (this will appear in metadata and under posts)
-    author = &quot;Stanislav Popov&quot;
+    # Author&#39;s name (this will appear in metadata and under posts)
+    author = &#34;Stanislav Popov&#34;
     
     # This text appears in the site header under website title
-    subtitle = &quot;Записки о Linux&quot;
+    subtitle = &#34;Записки о Linux&#34;
     
-    # Website's default description
-    defaultDescription = &quot;&quot;
+    # Website&#39;s default description
+    defaultDescription = &#34;&#34;
 
     # Used in the search engine
-    searchEngineURL = &quot;https://www.google.com/search&quot;
+    searchEngineURL = &#34;https://www.google.com/search&#34;
 
 [blackfriday]
     hrefTargetBlank = true # open the external links in a new window
@@ -288,30 +287,30 @@ paginate = 10
 </code></pre><h3 id="урлы">Урлы</h3>
 <p>Урлы зависят не от имени файла (оно может быть любым), а от шаблона урлов, в моем случае от даты и алиаса (slug).</p>
 <p><code>config.toml</code>:</p>
-<pre><code>[permalinks]
-    post = &quot;/blog/:year/:month/:day/:slug/&quot;
+<pre tabindex="0"><code>[permalinks]
+    post = &#34;/blog/:year/:month/:day/:slug/&#34;
 </code></pre><h3 id="правки-css-темы">Правки CSS темы</h3>
 <p>К сожалению препроцессора не будет.</p>
 <p><code>config.toml</code>:</p>
-<pre><code>[params]
-    customCSS = [&quot;css/custom.css&quot;]
+<pre tabindex="0"><code>[params]
+    customCSS = [&#34;css/custom.css&#34;]
 </code></pre><h3 id="картинки-и-прочая-статика">Картинки и прочая статика</h3>
 <p>Копируем все, что должно быть в корне сайта из <code>sources</code> в <code>static</code>.</p>
 <h3 id="discus">Discus</h3>
 <p><code>config.toml</code>:</p>
-<pre><code>[params]
+<pre tabindex="0"><code>[params]
     # Disqus shortcode
-    # Disable comments for a specific post by adding &quot;comments: false&quot; in its frontmatter
-    disqusShortname = &quot;popstas&quot;
+    # Disable comments for a specific post by adding &#34;comments: false&#34; in its frontmatter
+    disqusShortname = &#34;popstas&#34;
 </code></pre><p>Комменты появятся только при деплое, на localhost они отключены по каким-то причинам.</p>
 <h3 id="google-analytics">Google Analytics</h3>
 <p><code>config.toml</code>:</p>
-<pre><code>[params]
+<pre tabindex="0"><code>[params]
     # Google analytics account id
-    googleAnalytics = &quot;UA-70438594-1&quot;
+    googleAnalytics = &#34;UA-70438594-1&#34;
 </code></pre><h3 id="rss">RSS</h3>
 <p><code>config.toml</code>:</p>
-<pre><code>[params]
+<pre tabindex="0"><code>[params]
     rss = true  # switch to true to enable RSS icon link
 
     # Set to true to use a text label for RSS instead of an icon
@@ -319,26 +318,26 @@ paginate = 10
     textrss = false
 </code></pre><h3 id="боковая-колонка-последние-посты">Боковая колонка: последние посты</h3>
 <p><code>config.toml</code>:</p>
-<pre><code>[params]
+<pre tabindex="0"><code>[params]
 	# Number of recent posts that will be shown in the sidebar - set to 0 or remove to hide this section
 	sidebarRecentLimit = 5
 </code></pre><h3 id="боковая-колонка-twitter-лента-проекты-на-github">Боковая колонка: Twitter лента, проекты на Github</h3>
 <p>Кастомные виджеты sidebar не предусматривает, поэтому правим шаблон, дописываем в конец, перед <code>&lt;/aside&gt;</code>:
 <code>/themes/octopress/layouts/partials/sidebar.html</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">    {{ partial &#34;custom/twitterfeed.html&#34; . }}
-    
-    {{ partial &#34;custom/github.html&#34; . }}
-&lt;/<span style="color:#f92672">aside</span>&gt;
-</code></pre></div><p>После чего создаем в <code>themes/octopress/layouts/partials/custom</code> соответствующие файлы и копируем туда шаблоны из Octopress.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>    {{ partial &#34;custom/twitterfeed.html&#34; . }}
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    {{ partial &#34;custom/github.html&#34; . }}
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">aside</span>&gt;
+</span></span></code></pre></div><p>После чего создаем в <code>themes/octopress/layouts/partials/custom</code> соответствующие файлы и копируем туда шаблоны из Octopress.
 При этом нужно заменить переменные с <code>{{ site.var_name }}</code> на <code>{{ .Site.Params.varName }}</code> и добавить в <code>config.toml</code> нужные переменные:</p>
-<pre><code>[params]
+<pre tabindex="0"><code>[params]
     # Twitter feed
-    twitterUsername = &quot;popstas&quot;
+    twitterUsername = &#34;popstas&#34;
     # http://raisedadead.com/octopress-twitter-aside/
     twitterWidgetId = 691684611357806592
 
     # Github repos
-    githubUser = &quot;popstas&quot;
+    githubUser = &#34;popstas&#34;
     githubRepoCount = 10
 </code></pre><p>Код виджетов здесь:
 <a href="https://github.com/popstas/popstas.github.io-hugo/blob/master/themes/octopress/layouts/partials/custom/twitterfeed.html">Twitter</a>
@@ -410,7 +409,6 @@ paginate = 10
         <div>Старее: <a class="related" href="https://blog.popstas.ru/blog/2017/02/26/apt-cacher-ng-for-testing-ansible-roles-with-docker-and-gitlab-ci/" title="Настройка кеширующего прокси apt-cacher-ng для ускорения тестирования ansible ролей с Molecule, Gitlab CI и Docker">Настройка кеширующего прокси apt-cacher-ng для ускорения тестирования ansible ролей с Molecule, Gitlab CI и Docker</a></div>
     
   </p>
-  
 </footer>
 
       </article>
@@ -481,6 +479,12 @@ paginate = 10
           
             
               <li class="post">
+                <a href="/blog/2022/02/22/github-projects-2021/">Мои проекты 2021: умный дом, журнал медитаций, календарь активностей</a>
+              </li>
+            
+          
+            
+              <li class="post">
                 <a href="/blog/2022/01/29/content-2021/">Мой контент 2021: книги, музыка, фильмы, подкасты, каналы</a>
               </li>
             
@@ -521,12 +525,6 @@ paginate = 10
               </li>
             
           
-            
-              <li class="post">
-                <a href="/blog/2020/05/20/den-arieli-predskazuemaya-irracionalnost/">Содержание книги Дэна Ариели «Предсказуемая иррациональность»</a>
-              </li>
-            
-          
         </ul>
       </section>
     
@@ -537,7 +535,7 @@ paginate = 10
 </div>
 
     <footer role="contentinfo">
-      <p>Copyright &copy; 2015-2022 Stanislav Popov -
+      <p>Copyright &copy; 2015-2026 Stanislav Popov -
         <span class="credit">Powered by <a target="_blank" href="https://gohugo.io">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/">Hugo-Octopress</a> theme.
       </p>
     </footer>

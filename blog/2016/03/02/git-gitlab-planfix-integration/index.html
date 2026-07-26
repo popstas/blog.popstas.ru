@@ -79,7 +79,7 @@ git-hook-post-receive
   <meta name="author" content="Stanislav Popov">
 
   
-  <meta name="generator" content="Hugo 0.66.0" />
+  <meta name="generator" content="Hugo 0.164.0">
 
   
   
@@ -190,7 +190,7 @@ git-hook-post-receive
 </ul>
 <p>А главное, что все связано и из любого места можно перейти на связанные действия.</p>
 <p>Я уже краем уха слышал и видел обо всем этом и видел в чужих репозиториях, но вся картина нарисовалась только после использования.
-Да и к тому же на гитхабе до этого сталкивался только с pull-request'ами, там немного другое поведение.</p>
+Да и к тому же на гитхабе до этого сталкивался только с pull-request&rsquo;ами, там немного другое поведение.</p>
 <h2 id="phpstorm-tasks">PhpStorm tasks</h2>
 <p>В PhpStorm есть интеграция с менеджерами задач, Github там конечно есть, Планфикса там конечно нет,
 но зато если у менеджера задач есть API, можно интегрировать неподдерживаемый сервис.
@@ -209,14 +209,14 @@ TODO: это есть.</p>
 <p>Самые активные проекты мы дублируем на наш внутренний Gitlab. Использование довольно извращенное,
 Gitlab сейчас никак не участвует в рабочем процессе, являясь просто зеркалом и веб-интерфейсом для просмотра коммитов.</p>
 <p>На машине разработчика настраивается <code>pre-push</code> хук, который пушит также в Gitlab:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/bin/bash
-</span><span style="color:#75715e"></span>
-remote<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$1<span style="color:#e6db74">&#34;</span>
-
-<span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> <span style="color:#e6db74">&#34;</span>$remote<span style="color:#e6db74">&#34;</span> !<span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;gitlab&#34;</span> <span style="color:#f92672">]</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">[</span> <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>git remote show | grep -c <span style="color:#e6db74">&#34;gitlab&#34;</span><span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
-        git push gitlab master
-<span style="color:#66d9ef">fi</span>
-</code></pre></div><h2 id="git-и-planfix">Git и Planfix</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e">#!/bin/bash
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>remote<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$1<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> <span style="color:#e6db74">&#34;</span>$remote<span style="color:#e6db74">&#34;</span> !<span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;gitlab&#34;</span> <span style="color:#f92672">]</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">[</span> <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>git remote show | grep -c <span style="color:#e6db74">&#34;gitlab&#34;</span><span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>        git push gitlab master
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">fi</span>
+</span></span></code></pre></div><h2 id="git-и-planfix">Git и Planfix</h2>
 <p>Никакой готовой интеграции между Git и Планфиксом нет, зато обе системы гибкие и позволяют лепить уникальные решения без больших усилий.</p>
 <p>Git поддерживает хуки: скрипты, запускающиеся по определенным событиям.</p>
 <p>У каждой задачи в Планфиксе есть свой email адрес, если послать на него письмо, оно придет в задачу в виде комментария,
@@ -246,9 +246,9 @@ remote<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</spa
 <a href="https://github.com/popstas/server-scripts/blob/master/bin/git-hook-post-receive">git-hook-post-receive</a></p>
 <p>Чтобы подключить хук, надо положить скрипт в папку <code>.git/hooks/post-receive</code> и сделать его исполняемым,
 для этого надо выполнить в корне проекта:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">curl -s <span style="color:#e6db74">&#34;https://raw.githubusercontent.com/popstas/server-scripts/master/bin/average&#34;</span> &gt; .git/hooks/post-receive
-chmod +x .git/hooks/post-receive
-</code></pre></div><p>Так как у нас много проектов, я храню его в отдельной общей папке, а в каждом репозитории создаю символическую ссылку на него.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl -s <span style="color:#e6db74">&#34;https://raw.githubusercontent.com/popstas/server-scripts/master/bin/average&#34;</span> &gt; .git/hooks/post-receive
+</span></span><span style="display:flex;"><span>chmod +x .git/hooks/post-receive
+</span></span></code></pre></div><p>Так как у нас много проектов, я храню его в отдельной общей папке, а в каждом репозитории создаю символическую ссылку на него.</p>
 <p>Хук получает список коммитов, пришедших с последним пушем, находит первую ссылку на задачу Планфикса и отправляет туда письмо.</p>
 <h4 id="о-письме">О письме</h4>
 <ul>
@@ -259,8 +259,8 @@ chmod +x .git/hooks/post-receive
 <li><strong>Текст письма</strong>: текст коммита. Если репозиторий имеет зеркало на Gitlab, то в конец текста будет добавлена ссылка на коммит.</li>
 </ul>
 <p>Чтобы хук добавлял ссылку на Gitlab, не придумал ничего лучше, чем добавить remote <code>gitlab</code>:</p>
-<pre><code>git remote add gitlab ssh://git@org.ru:10022/sites/test.ru.git
-</code></pre><p>После этого хук будет извлекать из этого адреса URL <a href="http://org.ru/sites/test,">http://org.ru/sites/test,</a> который является главной страницей репозитория.
+<pre tabindex="0"><code>git remote add gitlab ssh://git@org.ru:10022/sites/test.ru.git
+</code></pre><p>После этого хук будет извлекать из этого адреса URL <a href="http://org.ru/sites/test">http://org.ru/sites/test</a>, который является главной страницей репозитория.
 Сайт при всем при этом не имеет доступа к Gitlab, поэтому push и pull в этот remote работать не будут.</p>
         </div>
         
@@ -320,7 +320,6 @@ chmod +x .git/hooks/post-receive
         <div>Старее: <a class="related" href="https://blog.popstas.ru/blog/2016/02/29/average-time-of-script-execution-in-bash/" title="average: измерение среднего времени выполнения команды в bash">average: измерение среднего времени выполнения команды в bash</a></div>
     
   </p>
-  
 </footer>
 
       </article>
@@ -391,6 +390,12 @@ chmod +x .git/hooks/post-receive
           
             
               <li class="post">
+                <a href="/blog/2022/02/22/github-projects-2021/">Мои проекты 2021: умный дом, журнал медитаций, календарь активностей</a>
+              </li>
+            
+          
+            
+              <li class="post">
                 <a href="/blog/2022/01/29/content-2021/">Мой контент 2021: книги, музыка, фильмы, подкасты, каналы</a>
               </li>
             
@@ -431,12 +436,6 @@ chmod +x .git/hooks/post-receive
               </li>
             
           
-            
-              <li class="post">
-                <a href="/blog/2020/05/20/den-arieli-predskazuemaya-irracionalnost/">Содержание книги Дэна Ариели «Предсказуемая иррациональность»</a>
-              </li>
-            
-          
         </ul>
       </section>
     
@@ -447,7 +446,7 @@ chmod +x .git/hooks/post-receive
 </div>
 
     <footer role="contentinfo">
-      <p>Copyright &copy; 2015-2022 Stanislav Popov -
+      <p>Copyright &copy; 2015-2026 Stanislav Popov -
         <span class="credit">Powered by <a target="_blank" href="https://gohugo.io">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/">Hugo-Octopress</a> theme.
       </p>
     </footer>

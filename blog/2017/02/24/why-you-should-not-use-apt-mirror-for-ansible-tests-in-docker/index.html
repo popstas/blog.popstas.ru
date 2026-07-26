@@ -65,7 +65,7 @@ Tl;dr: не делайте локальный репозиторий через 
   <meta name="author" content="Stanislav Popov">
 
   
-  <meta name="generator" content="Hugo 0.66.0" />
+  <meta name="generator" content="Hugo 0.164.0">
 
   
   
@@ -146,19 +146,19 @@ Tl;dr: не делайте локальный репозиторий через 
 <h2 id="настройка-apt-mirror">Настройка apt-mirror</h2>
 <p>Для синхронизации локального репозитория с основным вариант один - <code>apt-mirror</code>.
 <a href="https://apt-mirror.github.io">Официальный сайт</a> считает нас умными, поэтому все его инструкции заключаются в 3 строчках:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">apt-get install apt-mirror
-nano /etc/apt/mirror.list
-sudo apt-mirror
-</code></pre></div><p>Все действительно почти так просто. Почти.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>apt-get install apt-mirror
+</span></span><span style="display:flex;"><span>nano /etc/apt/mirror.list
+</span></span><span style="display:flex;"><span>sudo apt-mirror
+</span></span></code></pre></div><p>Все действительно почти так просто. Почти.</p>
 <h3 id="выбор-самого-быстрого-репозитория">Выбор самого быстрого репозитория</h3>
 <p>Пока гуглил тему, случайно наткнулся на <a href="https://hub.docker.com/r/evgeniyklemin/ubuntu-fastest-apt-mirror/">инструкцию</a>, как выбрать самый быстрый репозиторий.
-Скорее всего, для нас для всех это будет <a href="http://mirror.yandex.ru/ubuntu,">http://mirror.yandex.ru/ubuntu,</a> но можно в этом убедиться:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">wget -q -nv -O- http://ftp.ru.debian.org/debian/pool/main/n/netselect/netselect_0.3.ds1-26_amd64.deb &gt; /tmp/netselect_0.3.ds1-26_amd64.deb
-dpkg -i /tmp/netselect_0.3.ds1-26_amd64.deb
-netselect -s3 -t20 <span style="color:#e6db74">`</span>wget -q -nv -O- https://launchpad.net/ubuntu/+archivemirrors | grep -P -B8 <span style="color:#e6db74">&#34;statusUP|statusSIX&#34;</span> | grep -o -P <span style="color:#e6db74">&#34;(f|ht)tp.*\&#34;&#34;</span> | tr <span style="color:#e6db74">&#39;&#34;\n&#39;</span> <span style="color:#e6db74">&#39;  &#39;</span><span style="color:#e6db74">`</span>
-</code></pre></div><p>Пакета нет в репозитории Ubuntu, поэтому качаем из репозитория Debian
+Скорее всего, для нас для всех это будет <a href="http://mirror.yandex.ru/ubuntu">http://mirror.yandex.ru/ubuntu</a>, но можно в этом убедиться:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>wget -q -nv -O- http://ftp.ru.debian.org/debian/pool/main/n/netselect/netselect_0.3.ds1-26_amd64.deb &gt; /tmp/netselect_0.3.ds1-26_amd64.deb
+</span></span><span style="display:flex;"><span>dpkg -i /tmp/netselect_0.3.ds1-26_amd64.deb
+</span></span><span style="display:flex;"><span>netselect -s3 -t20 <span style="color:#e6db74">`</span>wget -q -nv -O- https://launchpad.net/ubuntu/+archivemirrors | grep -P -B8 <span style="color:#e6db74">&#34;statusUP|statusSIX&#34;</span> | grep -o -P <span style="color:#e6db74">&#34;(f|ht)tp.*\&#34;&#34;</span> | tr <span style="color:#e6db74">&#39;&#34;\n&#39;</span> <span style="color:#e6db74">&#39;  &#39;</span><span style="color:#e6db74">`</span>
+</span></span></code></pre></div><p>Пакета нет в репозитории Ubuntu, поэтому качаем из репозитория Debian
 В результате вы получите список из 3 самых быстрых (по пингу) репозиториев:</p>
-<pre><code>54 http://mirror.yandex.ru/ubuntu/
+<pre tabindex="0"><code>54 http://mirror.yandex.ru/ubuntu/
 89 http://ubuntu.volia.net/ubuntu-archive/
 124 http://nl.archive.ubuntu.com/ubuntu/
 </code></pre><h3 id="конфигурация">Конфигурация</h3>
@@ -169,40 +169,40 @@ netselect -s3 -t20 <span style="color:#e6db74">`</span>wget -q -nv -O- https://l
 <li>Меняем путь хранения зеркала, не забывая после этого скопировать пустой скрипт в новое место <code>/var/spool/apt-mirror/var/postmirror.sh</code>, иначе <code>apt-mirror</code> будет в конце падать с ошибкой. У меня зеркало будет храниться в <code>/var/backups/apt-mirror</code> (на диске с бекапами места много)</li>
 </ul>
 <p>Это же в виде команд:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sed -i /etc/apt/mirror.list <span style="color:#e6db74">&#39;s/archive.ubuntu.com/mirror.yandex.ru/g&#39;</span>
-sed -i /etc/apt/mirror.list <span style="color:#e6db74">&#39;s/ multiverse//g&#39;</span>
-sed -i /etc/apt/mirror.list <span style="color:#e6db74">&#39;s/\/var\/spool\/apt-mirror/\var\/backups\/apt-mirror/g&#39;</span>
-mkdir -p /var/backups/apt-mirror/var
-cp /var/spool/apt-mirror/var/postmirror.sh /var/backups/apt-mirror/var
-</code></pre></div><p>Добавляем в cron задание по обновлению репозитория, я буду запускать в 1 ночи:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sed -i <span style="color:#e6db74">&#39;s/#0 4/0 1/g&#39;</span> /etc/cron.d/apt-mirror
-</code></pre></div><p>Настраиваем nginx на отдачу репозитория, у меня конфиг такой:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">server <span style="color:#f92672">{</span>
-  listen 80;
-  server_name mirror.myserver.ru;
-  root /var/backups/apt-mirror/mirror/mirror.yandex.ru;
-  access_log off;
-
-  location / <span style="color:#f92672">{</span>
-    autoindex on;
-  <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span>
-</code></pre></div><p>Все готово, осталось запустить <code>apt-mirror</code> и подождать денек: у меня выкачивалось 142 Гб.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sed -i /etc/apt/mirror.list <span style="color:#e6db74">&#39;s/archive.ubuntu.com/mirror.yandex.ru/g&#39;</span>
+</span></span><span style="display:flex;"><span>sed -i /etc/apt/mirror.list <span style="color:#e6db74">&#39;s/ multiverse//g&#39;</span>
+</span></span><span style="display:flex;"><span>sed -i /etc/apt/mirror.list <span style="color:#e6db74">&#39;s/\/var\/spool\/apt-mirror/\var\/backups\/apt-mirror/g&#39;</span>
+</span></span><span style="display:flex;"><span>mkdir -p /var/backups/apt-mirror/var
+</span></span><span style="display:flex;"><span>cp /var/spool/apt-mirror/var/postmirror.sh /var/backups/apt-mirror/var
+</span></span></code></pre></div><p>Добавляем в cron задание по обновлению репозитория, я буду запускать в 1 ночи:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sed -i <span style="color:#e6db74">&#39;s/#0 4/0 1/g&#39;</span> /etc/cron.d/apt-mirror
+</span></span></code></pre></div><p>Настраиваем nginx на отдачу репозитория, у меня конфиг такой:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>server <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  listen 80;
+</span></span><span style="display:flex;"><span>  server_name mirror.myserver.ru;
+</span></span><span style="display:flex;"><span>  root /var/backups/apt-mirror/mirror/mirror.yandex.ru;
+</span></span><span style="display:flex;"><span>  access_log off;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  location / <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    autoindex on;
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>Все готово, осталось запустить <code>apt-mirror</code> и подождать денек: у меня выкачивалось 142 Гб.
 Причем обновления тоже будут весить ощутимо, как я понял: через день я запустил apt-mirror еще раз,
 он скачал 1.5 Гб.</p>
-<p>Проверяем URL <a href="http://mirror.myserver.ru/,">http://mirror.myserver.ru/,</a> там должен быть доступен каталог <code>ubuntu</code>.</p>
+<p>Проверяем URL <a href="http://mirror.myserver.ru/">http://mirror.myserver.ru/</a>, там должен быть доступен каталог <code>ubuntu</code>.</p>
 <p>После этого можете сменить системные репозитории в ваших локальных убунтах и наслаждаться скоростью.</p>
 <p>date = &ldquo;Ошибка&rdquo;
 slug = &ldquo;Ошибка/why-you-should-not-use-apt-mirror-for-ansible-tests-in-docker&rdquo;
 Хотя нет, насладиться сразу конечно не получилось. По какой-то причине (наверное причина в месте на диске), apt-mirror выкачивает только amd64 пакеты, из-за чего <code>apt-get update</code> ругается:</p>
-<pre><code>W: The repository 'http://apt.myserver.ru/ubuntu xenial-backports Release' does not have a Release file.
+<pre tabindex="0"><code>W: The repository &#39;http://apt.myserver.ru/ubuntu xenial-backports Release&#39; does not have a Release file.
 W: Failed to fetch http://apt.myserver.ru/ubuntu/dists/xenial/main/binary-i386/Packages: 404  Not Found
 W: Failed to fetch http://apt.myserver.ru/ubuntu/dists/xenial-updates/main/binary-i386/Packages: 404  Not Found
 E: Some index files failed to download. They have been ignored, or old ones used instead.
 </code></pre><p>Казалось бы ничего страшного, но уверен, что в тестах ненулевой код выхода apt-get будет все останавливать, поэтому придется чинить.</p>
 <p>Ошибка есть на <a href="https://askubuntu.com/questions/465303/apt-mirror-error/574141">askubuntu.com</a>, спасибо человеку, который предложил решение и негодовал по поводу того, что есть только в <code>man sources.list</code>.</p>
 <p>Решение напрашивается: явно указывать в <code>sources.list</code>, что в репозитории только amd64 пакеты, то есть вместо:</p>
-<pre><code>deb [ arch=amd64 ] http://apt.myserver.ru/ubuntu/ xenial main restricted universe
+<pre tabindex="0"><code>deb [ arch=amd64 ] http://apt.myserver.ru/ubuntu/ xenial main restricted universe
 </code></pre><p>С настройкой <code>apt-mirror</code> закончили, перейдем к использованию в тестах.</p>
 <h2 id="переключение-docker-контейнера-на-локальный-apt-репозиторий">Переключение Docker контейнера на локальный apt репозиторий</h2>
 <p><a href="https://github.com/ekino/docker-images/tree/master/apt-mirror">https://github.com/ekino/docker-images/tree/master/apt-mirror</a> - здесь приведено 2 способа настройки репозитория в контейнере, не изменяя его:</p>
@@ -211,78 +211,78 @@ E: Some index files failed to download. They have been ignored, or old ones used
 <li>[Хороший способ] Подмена <code>/etc/apt/sources.list</code></li>
 </ol>
 <p>Я выбрал хороший. Делается это монтированием файла на место <code>/etc/apt/sources.list</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">FQDN<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;apt.myserver.ru&#34;</span>
-cat <span style="color:#e6db74">&lt;&lt;EOF &gt; sources.list-$FQDN
-</span><span style="color:#e6db74">deb [ arch=amd64 ] http://$FQDN/ubuntu/ xenial main restricted universe
-</span><span style="color:#e6db74">deb [ arch=amd64 ] http://$FQDN/ubuntu/ xenial-updates main restricted universe
-</span><span style="color:#e6db74">deb [ arch=amd64 ] http://$FQDN/ubuntu/ xenial-security main restricted universe
-</span><span style="color:#e6db74">EOF</span>
-</code></pre></div><p>Чтобы не тащить с собой артефакты, файл создается командой.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>FQDN<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;apt.myserver.ru&#34;</span>
+</span></span><span style="display:flex;"><span>cat <span style="color:#e6db74">&lt;&lt;EOF &gt; sources.list-$FQDN
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">deb [ arch=amd64 ] http://$FQDN/ubuntu/ xenial main restricted universe
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">deb [ arch=amd64 ] http://$FQDN/ubuntu/ xenial-updates main restricted universe
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">deb [ arch=amd64 ] http://$FQDN/ubuntu/ xenial-security main restricted universe
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">EOF</span>
+</span></span></code></pre></div><p>Чтобы не тащить с собой артефакты, файл создается командой.</p>
 <p>После этого проверяем, это должно отработать нормально:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker run --rm -it -v <span style="color:#66d9ef">$(</span>readlink -f sources.list-$FQDN<span style="color:#66d9ef">)</span>:/etc/apt/sources.list ubuntu:16.04 apt-get update
-</code></pre></div><p>Если <code>readlink</code> выдает ошибку <code>readlink: illegal option -- f</code>, тогда вы скорее всего сидите на MacOS и вам нужно сделать <code>brew install coreutils</code> и прописать в переменную <code>PATH</code> то, что он просит.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker run --rm -it -v <span style="color:#66d9ef">$(</span>readlink -f sources.list-$FQDN<span style="color:#66d9ef">)</span>:/etc/apt/sources.list ubuntu:16.04 apt-get update
+</span></span></code></pre></div><p>Если <code>readlink</code> выдает ошибку <code>readlink: illegal option -- f</code>, тогда вы скорее всего сидите на MacOS и вам нужно сделать <code>brew install coreutils</code> и прописать в переменную <code>PATH</code> то, что он просит.</p>
 <h2 id="сравнение-скорости">Сравнение скорости</h2>
 <p>Я потратил около 4 часов на то, чтобы настроить локальные репозитории, посмотрим, сколько я сэкономил времени.
 Скорость инета у меня 30 мбит.</p>
 <p>Я сравнил отработку <code>time molecule test</code> на 3 ansible ролях, вот результаты:</p>
 <table>
-<thead>
-<tr>
-<th>Роль</th>
-<th>Стандартный репозиторий</th>
-<th>Локальный репозиторий</th>
-<th>Travis CI:</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>ansible-role-common</td>
-<td>8:04</td>
-<td>6:18</td>
-<td><strong>4:32</strong></td>
-</tr>
-<tr>
-<td>ansible-role-mysql</td>
-<td>3:41</td>
-<td><strong>3:22</strong></td>
-<td>3:46</td>
-</tr>
-<tr>
-<td>ansible-role-zsh</td>
-<td>3:29</td>
-<td><strong>2:54</strong></td>
-<td>4:08</td>
-</tr>
-</tbody>
+	<thead>
+			<tr>
+					<th>Роль</th>
+					<th>Стандартный репозиторий</th>
+					<th>Локальный репозиторий</th>
+					<th>Travis CI:</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>ansible-role-common</td>
+					<td>8:04</td>
+					<td>6:18</td>
+					<td><strong>4:32</strong></td>
+			</tr>
+			<tr>
+					<td>ansible-role-mysql</td>
+					<td>3:41</td>
+					<td><strong>3:22</strong></td>
+					<td>3:46</td>
+			</tr>
+			<tr>
+					<td>ansible-role-zsh</td>
+					<td>3:29</td>
+					<td><strong>2:54</strong></td>
+					<td>4:08</td>
+			</tr>
+	</tbody>
 </table>
 <p>Как видно, прирост небольшой, всего 20-30%.
 UPD 26.02.2017: на при написании <a href="/blog/2017/02/26/apt-cacher-ng-for-testing-ansible-roles-with-docker-and-gitlab-ci/">статьи про apt-cacher-ng</a> я перепроверил результаты и разница сократилась до 10-20%.</p>
 <p>Тут надо заметить, что в <code>test</code> входит проверка идемпотентности, где никакие пакеты не ставятся. Тогда я сравнил время выполнения &lsquo;molecule converge&rsquo; для <code>ansible-role-mysql</code> и получил немного лучшие результаты: 2:30 против 3:17, это уже почти в 2 раза быстрее.</p>
 <table>
-<thead>
-<tr>
-<th>Роль</th>
-<th>Стандартный репозиторий</th>
-<th>Локальный репозиторий</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>ansible-role-common</td>
-<td>8:15</td>
-<td>6:09</td>
-</tr>
-<tr>
-<td>ansible-role-mysql</td>
-<td>3:17</td>
-<td>2:30</td>
-</tr>
-<tr>
-<td>ansible-role-zsh</td>
-<td>4:05</td>
-<td>2:43</td>
-</tr>
-</tbody>
+	<thead>
+			<tr>
+					<th>Роль</th>
+					<th>Стандартный репозиторий</th>
+					<th>Локальный репозиторий</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>ansible-role-common</td>
+					<td>8:15</td>
+					<td>6:09</td>
+			</tr>
+			<tr>
+					<td>ansible-role-mysql</td>
+					<td>3:17</td>
+					<td>2:30</td>
+			</tr>
+			<tr>
+					<td>ansible-role-zsh</td>
+					<td>4:05</td>
+					<td>2:43</td>
+			</tr>
+	</tbody>
 </table>
 <h2 id="выводы-по-поводу-apt-mirror">Выводы по поводу apt-mirror</h2>
 <p>Результаты меня немного расстроили. Оказалось, что поразительного прироста в скорости, на который я надеялся, не будет.</p>
@@ -361,7 +361,6 @@ UPD 26.02.2017: на при написании <a href="/blog/2017/02/26/apt-cac
         <div>Старее: <a class="related" href="https://blog.popstas.ru/blog/2017/02/22/2017/02/22/git-extract-subproject-preserving-history/" title="Извлечение одной из папок в git репозитории в отдельный репозиторий с сохранением истории - git-extract-subproject">Извлечение одной из папок в git репозитории в отдельный репозиторий с сохранением истории - git-extract-subproject</a></div>
     
   </p>
-  
 </footer>
 
       </article>
@@ -432,6 +431,12 @@ UPD 26.02.2017: на при написании <a href="/blog/2017/02/26/apt-cac
           
             
               <li class="post">
+                <a href="/blog/2022/02/22/github-projects-2021/">Мои проекты 2021: умный дом, журнал медитаций, календарь активностей</a>
+              </li>
+            
+          
+            
+              <li class="post">
                 <a href="/blog/2022/01/29/content-2021/">Мой контент 2021: книги, музыка, фильмы, подкасты, каналы</a>
               </li>
             
@@ -472,12 +477,6 @@ UPD 26.02.2017: на при написании <a href="/blog/2017/02/26/apt-cac
               </li>
             
           
-            
-              <li class="post">
-                <a href="/blog/2020/05/20/den-arieli-predskazuemaya-irracionalnost/">Содержание книги Дэна Ариели «Предсказуемая иррациональность»</a>
-              </li>
-            
-          
         </ul>
       </section>
     
@@ -488,7 +487,7 @@ UPD 26.02.2017: на при написании <a href="/blog/2017/02/26/apt-cac
 </div>
 
     <footer role="contentinfo">
-      <p>Copyright &copy; 2015-2022 Stanislav Popov -
+      <p>Copyright &copy; 2015-2026 Stanislav Popov -
         <span class="credit">Powered by <a target="_blank" href="https://gohugo.io">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/">Hugo-Octopress</a> theme.
       </p>
     </footer>

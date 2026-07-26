@@ -18,7 +18,7 @@
   <meta property="og:description" content="Несколько недель назад я начал разбираться с Kapacitor, попутно записывая свои действия. Конца разбирательствам было не видно, записей становилось все больше и накопилось на серию.
 Речь пойдет о Kapacitor, последнеем слое из стека TICK от InfluxData, набора программ для сбора, отображения и обработке метрик.
 Tl;dr: думаю, что Kapacitor нужен только тем, кто уже использует InfluxDB для сбора метрик. С установкой могут быть проблемы, если руки кривые.
-А также небольшое замечание о том, как делать Pull request&#39;ы из браузера за 2 минуты
+А также небольшое замечание о том, как делать Pull request&rsquo;ы из браузера за 2 минуты
 " />
   <meta property="og:type" content="article" />
   <meta property="og:url" content="https://blog.popstas.ru/blog/2016/05/19/kapacitor-ansible-install-monit-comparsion/" />
@@ -59,13 +59,13 @@ Tl;dr: думаю, что Kapacitor нужен только тем, кто уж�
   <meta name="description" content="Несколько недель назад я начал разбираться с Kapacitor, попутно записывая свои действия. Конца разбирательствам было не видно, записей становилось все больше и накопилось на серию.
 Речь пойдет о Kapacitor, последнеем слое из стека TICK от InfluxData, набора программ для сбора, отображения и обработке метрик.
 Tl;dr: думаю, что Kapacitor нужен только тем, кто уже использует InfluxDB для сбора метрик. С установкой могут быть проблемы, если руки кривые.
-А также небольшое замечание о том, как делать Pull request&#39;ы из браузера за 2 минуты
+А также небольшое замечание о том, как делать Pull request&rsquo;ы из браузера за 2 минуты
 " />
   <meta name="keywords" content="monitoring, alerting, influxdata, kapacitor, ansible, github, monit">
   <meta name="author" content="Stanislav Popov">
 
   
-  <meta name="generator" content="Hugo 0.66.0" />
+  <meta name="generator" content="Hugo 0.164.0">
 
   
   
@@ -141,7 +141,7 @@ Tl;dr: думаю, что Kapacitor нужен только тем, кто уж�
           <p>Несколько недель назад я начал разбираться с Kapacitor, попутно записывая свои действия. Конца разбирательствам было не видно, записей становилось все больше и накопилось на серию.</p>
 <p>Речь пойдет о Kapacitor, последнеем слое из стека <a href="https://influxdata.com/get-started/what-is-the-tick-stack/">TICK</a> от InfluxData, набора программ для сбора, отображения и обработке метрик.</p>
 <p>Tl;dr: думаю, что Kapacitor нужен только тем, кто уже использует InfluxDB для сбора метрик. С установкой могут быть проблемы, если руки кривые.</p>
-<p>А также небольшое замечание о том, <a href="/blog/2016/05/19/kapacitor-ansible-install-monit-comparsion/#github-pull-request">как делать Pull request'ы из браузера за 2 минуты</a></p>
+<p>А также небольшое замечание о том, <a href="/blog/2016/05/19/kapacitor-ansible-install-monit-comparsion/#github-pull-request">как делать Pull request&rsquo;ы из браузера за 2 минуты</a></p>
 <p><img src="/images/2016-05/kapacitor.svg" alt="Kapacitor"></p>
 <p>Я уже настроил три слоя из стека: на серверах стоят агенты Telegraf, передают метрики в InfluxDB, их можно смотреть в виде графиков через Grafana (InfluxData предлагает свой Chronograf, но он сильно отстает от Grafana по функционалу на январь 2016 и вряд ли это изменится).</p>
 <p>У этой схемы есть недостаток: чтобы узнать, что что-то идет не так, нужно зайти в Grafana и глазами найти это что-то. Это меня устраивает, когда я уже знаю, что сервер плохо себя чувствует.</p>
@@ -162,51 +162,51 @@ Tl;dr: думаю, что Kapacitor нужен только тем, кто уж�
 <h2 id="установка">Установка</h2>
 <p>Ставить можно <a href="https://influxdata.com/downloads/#kapacitor">по-разному</a>.</p>
 <p>Для тех, кто не дружит с Ansible, установка из репозитория, <a href="https://docs.influxdata.com/influxdb/v0.13/introduction/installation/">взятая из мануала</a> по InfluxDB (репозиторий один на весь стек InfluxData):</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">curl -sL https://repos.influxdata.com/influxdb.key | sudo apt-key add -
-source /etc/lsb-release
-echo <span style="color:#e6db74">&#34;deb https://repos.influxdata.com/</span><span style="color:#e6db74">${</span>DISTRIB_ID,,<span style="color:#e6db74">}</span><span style="color:#e6db74"> </span><span style="color:#e6db74">${</span>DISTRIB_CODENAME<span style="color:#e6db74">}</span><span style="color:#e6db74"> stable&#34;</span> | sudo tee /etc/apt/sources.list.d/influxdb.list
-aptitude update
-aptitude install kapacitor
-</code></pre></div><p>Я буду ставить через Ansible <a href="https://github.com/rossmcdonald/kapacitor">rossmcdonald/kapacitor</a></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">ansible-galaxy install rossmcdonald.kapacitor
-ansible-playbook -c local kapacitor.yml
-</code></pre></div><h4 id="a-namegithub-pull-requestaкак-просто-делать-pull-request"><!-- raw HTML omitted --><!-- raw HTML omitted -->Как просто делать Pull request</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>curl -sL https://repos.influxdata.com/influxdb.key | sudo apt-key add -
+</span></span><span style="display:flex;"><span>source /etc/lsb-release
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;deb https://repos.influxdata.com/</span><span style="color:#e6db74">${</span>DISTRIB_ID,,<span style="color:#e6db74">}</span><span style="color:#e6db74"> </span><span style="color:#e6db74">${</span>DISTRIB_CODENAME<span style="color:#e6db74">}</span><span style="color:#e6db74"> stable&#34;</span> | sudo tee /etc/apt/sources.list.d/influxdb.list
+</span></span><span style="display:flex;"><span>aptitude update
+</span></span><span style="display:flex;"><span>aptitude install kapacitor
+</span></span></code></pre></div><p>Я буду ставить через Ansible <a href="https://github.com/rossmcdonald/kapacitor">rossmcdonald/kapacitor</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>ansible-galaxy install rossmcdonald.kapacitor
+</span></span><span style="display:flex;"><span>ansible-playbook -c local kapacitor.yml
+</span></span></code></pre></div><h4 id="как-просто-делать-pull-request"><!-- raw HTML omitted --><!-- raw HTML omitted -->Как просто делать Pull request</h4>
 <p>В плейбуке была ошибка, я бы об этом не упоминал, если бы не узнал недавно, как просто <a href="https://github.com/rossmcdonald/kapacitor/pull/1">делать pull request</a> прямо в браузере. Это заняло минуты две: жмем &ldquo;редактировать&rdquo; на интересующем файле, правим, ниже пишем сообщение к коммиту, сохраняем. Это автоматом создаст форк, отдельную ветку и сделает туда коммит. На следующей странице останется нажать &ldquo;Create pull request&rdquo;.</p>
 <h2 id="настройка">Настройка</h2>
 <p>Так как я уже использовал готовую ansible-роль, настройка уже включена в установку. Я взял <a href="https://github.com/rossmcdonald/kapacitor/blob/master/test.yml">тестовый плейбук</a> роли и изменил его: добавил данные авторизации в InfluxDB, SMTP, Slack. Опция <code>global</code> в настройках канала для уведомлений означает, что он будет использоваться по умолчанию в скриптах, иначе его нужно указывать явно.</p>
 <p>Для установки сделал такой плейбук:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">- <span style="color:#66d9ef">hosts</span>: all
-  <span style="color:#66d9ef">roles</span>:
-    - <span style="color:#66d9ef">role</span>: rossmcdonald.kapacitor
-  <span style="color:#66d9ef">vars</span>:
-    <span style="color:#75715e"># [influxdb]</span>
-    <span style="color:#66d9ef">kapacitor_influxdb_enabled</span>: <span style="color:#e6db74">&#34;true&#34;</span>
-    <span style="color:#66d9ef">kapacitor_influxdb_urls</span>:
-      - http://localhost:<span style="color:#ae81ff">8086</span>
-    <span style="color:#66d9ef">kapacitor_influxdb_username</span>: user
-    <span style="color:#66d9ef">kapacitor_influxdb_password</span>: pass
-
-    <span style="color:#75715e"># [smtp]</span>
-    <span style="color:#66d9ef">kapacitor_smtp_enabled</span>: <span style="color:#e6db74">&#34;true&#34;</span>
-    <span style="color:#66d9ef">kapacitor_smtp_host</span>: smtp.yandex.ru
-    <span style="color:#66d9ef">kapacitor_smtp_port</span>: <span style="color:#ae81ff">587</span>
-    <span style="color:#66d9ef">kapacitor_smtp_username</span>: example@yandex.ru
-    <span style="color:#66d9ef">kapacitor_smtp_password</span>: pass
-    <span style="color:#66d9ef">kapacitor_smtp_from</span>: example@yandex.ru
-    <span style="color:#66d9ef">kapacitor_smtp_to</span>:
-      - <span style="color:#e6db74">&#34;admin@example.com&#34;</span>
-
-    <span style="color:#75715e"># [slack]</span>
-    <span style="color:#66d9ef">kapacitor_slack_enabled</span>: <span style="color:#e6db74">&#34;true&#34;</span>
-    <span style="color:#66d9ef">kapacitor_slack_url</span>:  https://hooks.slack.com/services/G2JFW7VFQ/B13UHEN5X/9J6IVIcUw9FGCeF7hfjFNGBn <span style="color:#75715e"># url ненастоящий</span>
-    <span style="color:#66d9ef">kapacitor_slack_channel</span>: <span style="color:#e6db74">&#34;#servers&#34;</span>
-    <span style="color:#66d9ef">kapacitor_slack_global</span>: <span style="color:#e6db74">&#34;true&#34;</span>
-
-    <span style="color:#66d9ef">kapacitor_tasks_to_enable</span>:
-</code></pre></div><h2 id="проверка">Проверка</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span>- <span style="color:#f92672">hosts</span>: <span style="color:#ae81ff">all</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">roles</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">role</span>: <span style="color:#ae81ff">rossmcdonald.kapacitor</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">vars</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># [influxdb]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">kapacitor_influxdb_enabled</span>: <span style="color:#e6db74">&#34;true&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">kapacitor_influxdb_urls</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">http://localhost:8086</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">kapacitor_influxdb_username</span>: <span style="color:#ae81ff">user</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">kapacitor_influxdb_password</span>: <span style="color:#ae81ff">pass</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># [smtp]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">kapacitor_smtp_enabled</span>: <span style="color:#e6db74">&#34;true&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">kapacitor_smtp_host</span>: <span style="color:#ae81ff">smtp.yandex.ru</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">kapacitor_smtp_port</span>: <span style="color:#ae81ff">587</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">kapacitor_smtp_username</span>: <span style="color:#ae81ff">example@yandex.ru</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">kapacitor_smtp_password</span>: <span style="color:#ae81ff">pass</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">kapacitor_smtp_from</span>: <span style="color:#ae81ff">example@yandex.ru</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">kapacitor_smtp_to</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#e6db74">&#34;admin@example.com&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># [slack]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">kapacitor_slack_enabled</span>: <span style="color:#e6db74">&#34;true&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">kapacitor_slack_url</span>:  <span style="color:#ae81ff">https://hooks.slack.com/services/G2JFW7VFQ/B13UHEN5X/9J6IVIcUw9FGCeF7hfjFNGBn</span> <span style="color:#75715e"># url ненастоящий</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">kapacitor_slack_channel</span>: <span style="color:#e6db74">&#34;#servers&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">kapacitor_slack_global</span>: <span style="color:#e6db74">&#34;true&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">kapacitor_tasks_to_enable</span>:
+</span></span></code></pre></div><h2 id="проверка">Проверка</h2>
 <p>Лучший способ проверить, что Kapacitor видит данные из InfluxDB - записать фрагмент:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">kapacitor record stream -name la_alert -duration 5s
-</code></pre></div><p>Если запись пошла, можно приступать к самому интересному: созданию алертов.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>kapacitor record stream -name la_alert -duration 5s
+</span></span></code></pre></div><p>Если запись пошла, можно приступать к самому интересному: созданию алертов.</p>
 <p>Если через 5 секунд команда не завершилась, значит что-то пошло не так.
 Смотрим логи:</p>
 <ul>
@@ -216,14 +216,14 @@ ansible-playbook -c local kapacitor.yml
 <p>В моем случае домен, который я прописал в конфиге Kapacitor, был прописан в /etc/hosts на 127.0.1.1, Kapacitor слушал этот порт, соответственно, InfluxDB не мог достучаться из Docker-контейнера.</p>
 <h4 id="проблема-из-за-docker">Проблема из-за Docker</h4>
 <p>У меня в логах была ошибка:</p>
-<pre><code>open server: open service *influxdb.Service: subscription already exists
+<pre tabindex="0"><code>open server: open service *influxdb.Service: subscription already exists
 </code></pre><p>Я указал другой локальный хост, localhost, т.к. я не предполагаю, что к kapacitor будет обращаться кто-то, кроме InfluxDB, который стоит на той же машине. Это не помогло. Я не понял, в чем ошибка, nmap показывает свободный порт. Оставил стандартный, поддомен машины, это почему-то сработало.</p>
-<p>Оказалось, проблема была в том, что InfluxDB при первом запуске Kapacitor'а создал на него подписки (subscriptions), которые означают то, что InfluxDB будет пересылать в Kapacitor все, что приходит в него.</p>
-<p>InfluxDB у меня крутится в Docker'е с проброшенными портами, а Kapacitor - нет, то есть они технически были не на одной машине. Точнее, для Kapacitor'а казалось, что InfluxDB на этой же машине, но для Influx&rsquo;a он на другой машине! Оказалось, что изнутри докера внутренний адрес, на который создались подписки, вел не туда, поэтому данные не доходили до Kapacitor, чтобы исправить это, понадобилось удалить подписки, узнав их имена:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SHOW</span> SUBSCRIPTIONS
-<span style="color:#66d9ef">DROP</span> SUBSCRIPTION <span style="color:#e6db74">&#34;kapacitor-42d050d7-5e60-462f-b079-3f8157ec2eff&#34;</span> <span style="color:#66d9ef">ON</span> <span style="color:#e6db74">&#34;telegraf&#34;</span>.<span style="color:#e6db74">&#34;default&#34;</span>
-<span style="color:#66d9ef">DROP</span> SUBSCRIPTION <span style="color:#e6db74">&#34;kapacitor-42d050d7-5e60-462f-b079-3f8157ec2eff&#34;</span> <span style="color:#66d9ef">ON</span> <span style="color:#e6db74">&#34;_internal&#34;</span>.<span style="color:#e6db74">&#34;monitor&#34;</span>
-</code></pre></div><h2 id="выводы">Выводы</h2>
+<p>Оказалось, проблема была в том, что InfluxDB при первом запуске Kapacitor&rsquo;а создал на него подписки (subscriptions), которые означают то, что InfluxDB будет пересылать в Kapacitor все, что приходит в него.</p>
+<p>InfluxDB у меня крутится в Docker&rsquo;е с проброшенными портами, а Kapacitor - нет, то есть они технически были не на одной машине. Точнее, для Kapacitor&rsquo;а казалось, что InfluxDB на этой же машине, но для Influx&rsquo;a он на другой машине! Оказалось, что изнутри докера внутренний адрес, на который создались подписки, вел не туда, поэтому данные не доходили до Kapacitor, чтобы исправить это, понадобилось удалить подписки, узнав их имена:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SHOW</span> SUBSCRIPTIONS
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">DROP</span> SUBSCRIPTION <span style="color:#e6db74">&#34;kapacitor-42d050d7-5e60-462f-b079-3f8157ec2eff&#34;</span> <span style="color:#66d9ef">ON</span> <span style="color:#e6db74">&#34;telegraf&#34;</span>.<span style="color:#e6db74">&#34;default&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">DROP</span> SUBSCRIPTION <span style="color:#e6db74">&#34;kapacitor-42d050d7-5e60-462f-b079-3f8157ec2eff&#34;</span> <span style="color:#66d9ef">ON</span> <span style="color:#e6db74">&#34;_internal&#34;</span>.<span style="color:#e6db74">&#34;monitor&#34;</span>
+</span></span></code></pre></div><h2 id="выводы">Выводы</h2>
 <ol>
 <li>Использование Docker для InfluxDB сильно усложнило мне процесс установки при том, что ничего мне не дало: InfluxDB - это один бинарник, если у вас вся инфраструктура живет не в контейнерах, используйте установку из репозиториев, это проще. С другой стороны откатиться на предыдущую версию будет сложнее&hellip;</li>
 <li>Kapacitor сильно превосходит Monit по возможностям алертинга, но уступает ему в контроле над ситуацией. Хотя можно себе представить сценарий, что Kapacitor отправляет POST-запрос с инструкциями к действиям сервису, который делает что-то, но меня такой самопальный RPC пугает.</li>
@@ -296,7 +296,6 @@ ansible-playbook -c local kapacitor.yml
         <div>Старее: <a class="related" href="https://blog.popstas.ru/blog/2016/04/11/bash-on-ubuntu-on-windows/" title="Bash on Ubuntu on Windows: первый блин">Bash on Ubuntu on Windows: первый блин</a></div>
     
   </p>
-  
 </footer>
 
       </article>
@@ -367,6 +366,12 @@ ansible-playbook -c local kapacitor.yml
           
             
               <li class="post">
+                <a href="/blog/2022/02/22/github-projects-2021/">Мои проекты 2021: умный дом, журнал медитаций, календарь активностей</a>
+              </li>
+            
+          
+            
+              <li class="post">
                 <a href="/blog/2022/01/29/content-2021/">Мой контент 2021: книги, музыка, фильмы, подкасты, каналы</a>
               </li>
             
@@ -407,12 +412,6 @@ ansible-playbook -c local kapacitor.yml
               </li>
             
           
-            
-              <li class="post">
-                <a href="/blog/2020/05/20/den-arieli-predskazuemaya-irracionalnost/">Содержание книги Дэна Ариели «Предсказуемая иррациональность»</a>
-              </li>
-            
-          
         </ul>
       </section>
     
@@ -423,7 +422,7 @@ ansible-playbook -c local kapacitor.yml
 </div>
 
     <footer role="contentinfo">
-      <p>Copyright &copy; 2015-2022 Stanislav Popov -
+      <p>Copyright &copy; 2015-2026 Stanislav Popov -
         <span class="credit">Powered by <a target="_blank" href="https://gohugo.io">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/">Hugo-Octopress</a> theme.
       </p>
     </footer>

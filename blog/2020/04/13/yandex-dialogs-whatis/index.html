@@ -59,7 +59,7 @@
   <meta name="author" content="Stanislav Popov">
 
   
-  <meta name="generator" content="Hugo 0.66.0" />
+  <meta name="generator" content="Hugo 0.164.0">
 
   
   
@@ -148,7 +148,7 @@
 <p>&ndash; Где арбуз?<br>
 &ndash; В красной бутылке</p>
 </blockquote>
-<p>Попробовать можно так: скажите Алисе &ldquo;Запусти навык <a href="https://dialogs.yandex.ru/store/skills/00203e6e-vtoraya-pamya">Вторая память</a>&quot;.</p>
+<p>Попробовать можно так: скажите Алисе &ldquo;Запусти навык <a href="https://dialogs.yandex.ru/store/skills/00203e6e-vtoraya-pamya">Вторая память</a>&rdquo;.</p>
 <p>Сценарии использования описаны <a href="https://github.com/popstas/yandex-dialogs-whatis#%D1%81%D1%86%D0%B5%D0%BD%D0%B0%D1%80%D0%B8%D0%B8-%D0%B8%D1%81%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F">на Github</a>.</p>
 <h2 id="технические-особенности">Технические особенности</h2>
 <p>Проект написан на Node.js поверх <a href="https://github.com/fletcherist/yandex-dialogs-sdk">yandex-dialogs-sdk</a>, который поверх Express.js.</p>
@@ -169,22 +169,22 @@
 </ul>
 <h2 id="структура-навыка">Структура навыка:</h2>
 <h3 id="commands">commands</h3>
-<p>Главная сущность, команда юзера. Команды расширены, по сравнению с SDK. Можно сказать, что это интенты. Команда состоит из mather'а (то, что определяет, сработает эта команда или нет) и handler'а (что собственно команда делает).</p>
+<p>Главная сущность, команда юзера. Команды расширены, по сравнению с SDK. Можно сказать, что это интенты. Команда состоит из mather&rsquo;а (то, что определяет, сработает эта команда или нет) и handler&rsquo;а (что собственно команда делает).</p>
 <p>Пример простой команды:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">module</span>.<span style="color:#a6e22e">exports</span> <span style="color:#f92672">=</span> {
-  <span style="color:#a6e22e">intent</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;thankyou&#39;</span>,
-  <span style="color:#a6e22e">matcher</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;спасибо&#39;</span>,
-
-  <span style="color:#a6e22e">handler</span>(<span style="color:#a6e22e">ctx</span>) {
-    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">replyRandom</span>([
-      <span style="color:#e6db74">&#39;Всегда пожалуйста&#39;</span>,
-      <span style="color:#e6db74">&#39;Не за что&#39;</span>,
-      <span style="color:#e6db74">&#39;Обращайся!&#39;</span>,
-      <span style="color:#e6db74">&#39;Пожалуйста&#39;</span>,
-    ]);
-  }
-};
-</code></pre></div><p>Команд <strong>много</strong>. Когда я начинал писать навык, который умеет делать не так уж много, я не думал, что команд будет больше 50.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#a6e22e">module</span>.<span style="color:#a6e22e">exports</span> <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">intent</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;thankyou&#39;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">matcher</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;спасибо&#39;</span>,
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">handler</span>(<span style="color:#a6e22e">ctx</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">replyRandom</span>([
+</span></span><span style="display:flex;"><span>      <span style="color:#e6db74">&#39;Всегда пожалуйста&#39;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#e6db74">&#39;Не за что&#39;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#e6db74">&#39;Обращайся!&#39;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#e6db74">&#39;Пожалуйста&#39;</span>,
+</span></span><span style="display:flex;"><span>    ]);
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><p>Команд <strong>много</strong>. Когда я начинал писать навык, который умеет делать не так уж много, я не думал, что команд будет больше 50.</p>
 <p>Команды разбиты на группы:</p>
 <ul>
 <li><code>core</code> - общие команды, типа реакции на оскорбления, похвалы, привет, пока, номер версии, посещаемость за последние 2 дня</li>
@@ -225,51 +225,51 @@
 <p>Можно сказать, что это NLU (Natural Language Understanding). При успешном нахождении в <code>ctx.entities</code> появляются дополнительные данные. У меня сущность была одна: <code>shop</code>, то есть распознавались покупки и действия с ними. Например, <code>{ action: 'delete', products: 'колбаса' }</code></p>
 <h3 id="собираем-всё-вместе">Собираем всё вместе</h3>
 <p>Само приложение состоит из подключение всех этих составляющих, вот по сути весь его код (<a href="https://github.com/popstas/yandex-dialogs-whatis/blob/master/src/app.js">полная версия app.js</a>):</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">async</span> <span style="color:#a6e22e">init</span>() {
-  <span style="color:#75715e">// добавляют функции в ctx
-</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">alice</span>.<span style="color:#a6e22e">use</span>(<span style="color:#a6e22e">middlewares</span>.<span style="color:#a6e22e">reply</span>());
-  <span style="color:#a6e22e">alice</span>.<span style="color:#a6e22e">use</span>(<span style="color:#a6e22e">middlewares</span>.<span style="color:#a6e22e">replyRandom</span>());
-  <span style="color:#a6e22e">alice</span>.<span style="color:#a6e22e">use</span>(<span style="color:#a6e22e">middlewares</span>.<span style="color:#a6e22e">az</span>());
-  <span style="color:#a6e22e">alice</span>.<span style="color:#a6e22e">use</span>(<span style="color:#a6e22e">middlewares</span>.<span style="color:#a6e22e">logMessage</span>());
-  <span style="color:#a6e22e">alice</span>.<span style="color:#a6e22e">use</span>(<span style="color:#a6e22e">middlewares</span>.<span style="color:#a6e22e">yametrika</span>(<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">config</span>.<span style="color:#a6e22e">YAMETRIKA_ID</span>));
-  <span style="color:#a6e22e">alice</span>.<span style="color:#a6e22e">use</span>(<span style="color:#a6e22e">middlewares</span>.<span style="color:#a6e22e">chatbase</span>(<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">config</span>.<span style="color:#a6e22e">CHATBASE_KEY</span>, <span style="color:#a6e22e">packageJson</span>.<span style="color:#a6e22e">version</span>));
-
-  <span style="color:#75715e">// изменяют ctx во время запроса
-</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">alice</span>.<span style="color:#a6e22e">use</span>(<span style="color:#a6e22e">middlewares</span>.<span style="color:#a6e22e">store</span>());
-  <span style="color:#a6e22e">alice</span>.<span style="color:#a6e22e">use</span>(<span style="color:#a6e22e">middlewares</span>.<span style="color:#a6e22e">cleaner</span>());
-  <span style="color:#a6e22e">alice</span>.<span style="color:#a6e22e">use</span>(<span style="color:#a6e22e">middlewares</span>.<span style="color:#a6e22e">counter</span>());
-
-  <span style="color:#a6e22e">alice</span>.<span style="color:#a6e22e">use</span>(<span style="color:#a6e22e">middlewares</span>.<span style="color:#a6e22e">confirm</span>());
-
-  <span style="color:#a6e22e">alice</span>.<span style="color:#a6e22e">use</span>(<span style="color:#a6e22e">entities</span>.<span style="color:#a6e22e">shop</span>());
-
-  <span style="color:#a6e22e">await</span> <span style="color:#a6e22e">utils</span>.<span style="color:#a6e22e">initMorph</span>();
-
-  <span style="color:#75715e">// подключение всех команд
-</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">commands</span>.<span style="color:#a6e22e">utils</span>.<span style="color:#a6e22e">useCommands</span>(<span style="color:#a6e22e">alice</span>, <span style="color:#a6e22e">commands</span>.<span style="color:#a6e22e">core</span>);
-  <span style="color:#a6e22e">commands</span>.<span style="color:#a6e22e">utils</span>.<span style="color:#a6e22e">useCommands</span>(<span style="color:#a6e22e">alice</span>, <span style="color:#a6e22e">commands</span>.<span style="color:#a6e22e">items</span>);
-  <span style="color:#a6e22e">commands</span>.<span style="color:#a6e22e">utils</span>.<span style="color:#a6e22e">useCommands</span>(<span style="color:#a6e22e">alice</span>, <span style="color:#a6e22e">commands</span>.<span style="color:#a6e22e">help</span>);
-
-  <span style="color:#a6e22e">alice</span>.<span style="color:#a6e22e">any</span>(<span style="color:#a6e22e">commands</span>.<span style="color:#a6e22e">core</span>.<span style="color:#a6e22e">any</span>.<span style="color:#a6e22e">handler</span>);
-}
-</code></pre></div><h4 id="обход-cors">Обход CORS</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">async</span> <span style="color:#a6e22e">init</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// добавляют функции в ctx
+</span></span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">alice</span>.<span style="color:#a6e22e">use</span>(<span style="color:#a6e22e">middlewares</span>.<span style="color:#a6e22e">reply</span>());
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">alice</span>.<span style="color:#a6e22e">use</span>(<span style="color:#a6e22e">middlewares</span>.<span style="color:#a6e22e">replyRandom</span>());
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">alice</span>.<span style="color:#a6e22e">use</span>(<span style="color:#a6e22e">middlewares</span>.<span style="color:#a6e22e">az</span>());
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">alice</span>.<span style="color:#a6e22e">use</span>(<span style="color:#a6e22e">middlewares</span>.<span style="color:#a6e22e">logMessage</span>());
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">alice</span>.<span style="color:#a6e22e">use</span>(<span style="color:#a6e22e">middlewares</span>.<span style="color:#a6e22e">yametrika</span>(<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">config</span>.<span style="color:#a6e22e">YAMETRIKA_ID</span>));
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">alice</span>.<span style="color:#a6e22e">use</span>(<span style="color:#a6e22e">middlewares</span>.<span style="color:#a6e22e">chatbase</span>(<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">config</span>.<span style="color:#a6e22e">CHATBASE_KEY</span>, <span style="color:#a6e22e">packageJson</span>.<span style="color:#a6e22e">version</span>));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// изменяют ctx во время запроса
+</span></span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">alice</span>.<span style="color:#a6e22e">use</span>(<span style="color:#a6e22e">middlewares</span>.<span style="color:#a6e22e">store</span>());
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">alice</span>.<span style="color:#a6e22e">use</span>(<span style="color:#a6e22e">middlewares</span>.<span style="color:#a6e22e">cleaner</span>());
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">alice</span>.<span style="color:#a6e22e">use</span>(<span style="color:#a6e22e">middlewares</span>.<span style="color:#a6e22e">counter</span>());
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">alice</span>.<span style="color:#a6e22e">use</span>(<span style="color:#a6e22e">middlewares</span>.<span style="color:#a6e22e">confirm</span>());
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">alice</span>.<span style="color:#a6e22e">use</span>(<span style="color:#a6e22e">entities</span>.<span style="color:#a6e22e">shop</span>());
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">utils</span>.<span style="color:#a6e22e">initMorph</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// подключение всех команд
+</span></span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">commands</span>.<span style="color:#a6e22e">utils</span>.<span style="color:#a6e22e">useCommands</span>(<span style="color:#a6e22e">alice</span>, <span style="color:#a6e22e">commands</span>.<span style="color:#a6e22e">core</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">commands</span>.<span style="color:#a6e22e">utils</span>.<span style="color:#a6e22e">useCommands</span>(<span style="color:#a6e22e">alice</span>, <span style="color:#a6e22e">commands</span>.<span style="color:#a6e22e">items</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">commands</span>.<span style="color:#a6e22e">utils</span>.<span style="color:#a6e22e">useCommands</span>(<span style="color:#a6e22e">alice</span>, <span style="color:#a6e22e">commands</span>.<span style="color:#a6e22e">help</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">alice</span>.<span style="color:#a6e22e">any</span>(<span style="color:#a6e22e">commands</span>.<span style="color:#a6e22e">core</span>.<span style="color:#a6e22e">any</span>.<span style="color:#a6e22e">handler</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="обход-cors">Обход CORS</h4>
 <p>Чтобы мой навык принимал запросы в браузере с любых доменов, я запускаю SDK не обычным <code>alice.listen()</code>, а своим хэндлером, который добавляет заголовки CORS после этого вызывает функцию SDK <code>alice.handleRequest()</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">handlerExpress</span>() {
-  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">app</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">express</span>();
-  <span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">use</span>(<span style="color:#a6e22e">bodyParser</span>.<span style="color:#a6e22e">json</span>());
-  <span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">use</span>(<span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>, <span style="color:#a6e22e">next</span>) {
-    <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">header</span>(<span style="color:#e6db74">&#39;Access-Control-Allow-Origin&#39;</span>, <span style="color:#e6db74">&#39;*&#39;</span>);
-    <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">header</span>(<span style="color:#e6db74">&#39;Access-Control-Allow-Headers&#39;</span>, <span style="color:#e6db74">&#39;Origin, X-Requested-With, Content-Type, Accept&#39;</span>);
-    <span style="color:#a6e22e">next</span>();
-  });
-  <span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">use</span>(<span style="color:#a6e22e">express</span>.<span style="color:#66d9ef">static</span>(<span style="color:#e6db74">&#39;static&#39;</span>));
-  <span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">post</span>(<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">config</span>.<span style="color:#a6e22e">API_ENDPOINT</span>, <span style="color:#a6e22e">async</span> (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
-    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">jsonAnswer</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">await</span> <span style="color:#a6e22e">alice</span>.<span style="color:#a6e22e">handleRequest</span>(<span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">body</span>);
-    <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">json</span>(<span style="color:#a6e22e">jsonAnswer</span>);
-  });
-  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">app</span>;
-}
-</code></pre></div><h4 id="запуск-в-продакшене">Запуск в продакшене</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#a6e22e">handlerExpress</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">app</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">express</span>();
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">use</span>(<span style="color:#a6e22e">bodyParser</span>.<span style="color:#a6e22e">json</span>());
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">use</span>(<span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>, <span style="color:#a6e22e">next</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">header</span>(<span style="color:#e6db74">&#39;Access-Control-Allow-Origin&#39;</span>, <span style="color:#e6db74">&#39;*&#39;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">header</span>(<span style="color:#e6db74">&#39;Access-Control-Allow-Headers&#39;</span>, <span style="color:#e6db74">&#39;Origin, X-Requested-With, Content-Type, Accept&#39;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">next</span>();
+</span></span><span style="display:flex;"><span>  });
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">use</span>(<span style="color:#a6e22e">express</span>.<span style="color:#66d9ef">static</span>(<span style="color:#e6db74">&#39;static&#39;</span>));
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">post</span>(<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">config</span>.<span style="color:#a6e22e">API_ENDPOINT</span>, <span style="color:#66d9ef">async</span> (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">jsonAnswer</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">alice</span>.<span style="color:#a6e22e">handleRequest</span>(<span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">body</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">json</span>(<span style="color:#a6e22e">jsonAnswer</span>);
+</span></span><span style="display:flex;"><span>  });
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">app</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="запуск-в-продакшене">Запуск в продакшене</h4>
 <p>Навык в бою крутится в docker контейнере, при пуше в git прогоняются тесты на Travis CI и собирается контейнер на Docker Hub, по <code>npm version</code> автоматически прогоняется весь процесс деплоя: установка версии, обновление Changelog (который генерируется из коммитов, благодаря <a href="/blog/2016/03/06/changelog-dot-md-generate-from-git-conventions/">Conventional Changelog</a>). Вся эта магия в <a href="https://github.com/popstas/yandex-dialogs-whatis/blob/master/package.json"><code>package.json</code></a>.</p>
 <hr>
 <p>Надеюсь, эта статья поможет тем, кто захочет написать свой навык на этом SDK. Можно некоторые команды и мидлвари прямо себе копировать. За кажущейся простотой скрываются часы чтения логов того, что же там юзеры говорят, такое не придумать в вакууме.</p>
@@ -331,7 +331,6 @@
         <div>Старее: <a class="related" href="https://blog.popstas.ru/blog/2020/04/12/deep-learning-ngu-2019/" title="Конспекты курса Deep Learning на пальцах 2019: таймкоды">Конспекты курса Deep Learning на пальцах 2019: таймкоды</a></div>
     
   </p>
-  
 </footer>
 
       </article>
@@ -402,6 +401,12 @@
           
             
               <li class="post">
+                <a href="/blog/2022/02/22/github-projects-2021/">Мои проекты 2021: умный дом, журнал медитаций, календарь активностей</a>
+              </li>
+            
+          
+            
+              <li class="post">
                 <a href="/blog/2022/01/29/content-2021/">Мой контент 2021: книги, музыка, фильмы, подкасты, каналы</a>
               </li>
             
@@ -442,12 +447,6 @@
               </li>
             
           
-            
-              <li class="post">
-                <a href="/blog/2020/05/20/den-arieli-predskazuemaya-irracionalnost/">Содержание книги Дэна Ариели «Предсказуемая иррациональность»</a>
-              </li>
-            
-          
         </ul>
       </section>
     
@@ -458,7 +457,7 @@
 </div>
 
     <footer role="contentinfo">
-      <p>Copyright &copy; 2015-2022 Stanislav Popov -
+      <p>Copyright &copy; 2015-2026 Stanislav Popov -
         <span class="credit">Powered by <a target="_blank" href="https://gohugo.io">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/">Hugo-Octopress</a> theme.
       </p>
     </footer>

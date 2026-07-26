@@ -73,7 +73,7 @@
   <meta name="author" content="Stanislav Popov">
 
   
-  <meta name="generator" content="Hugo 0.66.0" />
+  <meta name="generator" content="Hugo 0.164.0">
 
   
   
@@ -169,7 +169,7 @@ Moving Files from one Git Repository to Another, Preserving History</a>, за 10
 </ol>
 <p>По идее уже после п.2 временный репозиторий выглядит как готовый модуль, пп.3-6 нужны для того, чтобы не тащить следы истории и настроек родительского проекта в дочерний.</p>
 <p>Например, у меня есть репозиторий <code>ansible-server</code>, в нем лежит роль <code>roles/server-scripts</code>. Тогда нужно перейти в папку ansible-server и запустить:</p>
-<pre><code>git-extract-subproject roles/server-scripts ansible-role-server-scripts
+<pre tabindex="0"><code>git-extract-subproject roles/server-scripts ansible-role-server-scripts
 </code></pre><p>После этого рядом с <code>ansible-server</code> создастся готовый проект <code>ansible-role-server-scripts</code>. Остается добавить в него remote origin куда следует и запушить.</p>
 <p>В итоге получился репозиторий с историей - <a href="https://github.com/viasite-ansible/ansible-role-server-scripts/commits/master">viasite-ansible/ansible-role-server-scripts</a>.</p>
 <p>Код скрипта здесь - <a href="https://github.com/popstas/server-scripts/blob/master/bin/git-extract-subproject">popstas/server-scripts</a></p>
@@ -231,7 +231,6 @@ Moving Files from one Git Repository to Another, Preserving History</a>, за 10
         <div>Старее: <a class="related" href="https://blog.popstas.ru/blog/2016/05/19/kapacitor-ansible-install-monit-comparsion/" title="Kapacitor: часть 1. Введение, сравнение с Monit, установка с Ansible и без, настройка">Kapacitor: часть 1. Введение, сравнение с Monit, установка с Ansible и без, настройка</a></div>
     
   </p>
-  
 </footer>
 
       </article>
@@ -302,6 +301,12 @@ Moving Files from one Git Repository to Another, Preserving History</a>, за 10
           
             
               <li class="post">
+                <a href="/blog/2022/02/22/github-projects-2021/">Мои проекты 2021: умный дом, журнал медитаций, календарь активностей</a>
+              </li>
+            
+          
+            
+              <li class="post">
                 <a href="/blog/2022/01/29/content-2021/">Мой контент 2021: книги, музыка, фильмы, подкасты, каналы</a>
               </li>
             
@@ -342,12 +347,6 @@ Moving Files from one Git Repository to Another, Preserving History</a>, за 10
               </li>
             
           
-            
-              <li class="post">
-                <a href="/blog/2020/05/20/den-arieli-predskazuemaya-irracionalnost/">Содержание книги Дэна Ариели «Предсказуемая иррациональность»</a>
-              </li>
-            
-          
         </ul>
       </section>
     
@@ -358,7 +357,7 @@ Moving Files from one Git Repository to Another, Preserving History</a>, за 10
 </div>
 
     <footer role="contentinfo">
-      <p>Copyright &copy; 2015-2022 Stanislav Popov -
+      <p>Copyright &copy; 2015-2026 Stanislav Popov -
         <span class="credit">Powered by <a target="_blank" href="https://gohugo.io">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/">Hugo-Octopress</a> theme.
       </p>
     </footer>

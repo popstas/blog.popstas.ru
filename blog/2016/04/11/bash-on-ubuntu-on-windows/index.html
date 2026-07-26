@@ -61,7 +61,7 @@ Tl;dr: оно очень сырое, не работает почти ничег
   <meta name="author" content="Stanislav Popov">
 
   
-  <meta name="generator" content="Hugo 0.66.0" />
+  <meta name="generator" content="Hugo 0.164.0">
 
   
   
@@ -139,15 +139,15 @@ Tl;dr: оно очень сырое, не работает почти ничег
 <p><img src="/images/2016-04/windows-ubuntu-bash.png" alt="Bash on Ubuntu on Windows"></p>
 <p>Первым делом захотелось родной zsh, берем aptitude, ставим, Ubuntu же!
 Шелл открылся под root, так что sudo не нужен.</p>
-<pre><code>$ aptitude install zsh
+<pre tabindex="0"><code>$ aptitude install zsh
 </code></pre><p>Конечно, ничего не вышло :) Во-первых, aptitude не нашел файл /var/lock/aptitude,
 нет проблем, ставим через <code>apt-get</code>, но оказывается, что нет инета.</p>
 <p>Про это есть <a href="https://github.com/Microsoft/CommandLine-Documentation/issues/14">issue#14</a> (а багов за 4 дня открыли 40+), оказалось, дело в DNS, лечится так:</p>
-<pre><code>$ echo &quot;nameserver 8.8.8.8&quot; &gt; /etc/resolv.conf
+<pre tabindex="0"><code>$ echo &#34;nameserver 8.8.8.8&#34; &gt; /etc/resolv.conf
 </code></pre><p>При этом не заработает ifconfig, ping, nslookup, но пакеты начнут ставиться.
 apt-get при установке поругивается, но ставит.</p>
 <h2 id="zsh">Zsh</h2>
-<pre><code>$ apt-get update &amp;&amp; apt-get install git zsh
+<pre tabindex="0"><code>$ apt-get update &amp;&amp; apt-get install git zsh
 </code></pre><p>Ок, сработало, ставлю свой <a href="https://github.com/popstas/zsh-config">zsh-config</a>
 Что-то пошло не так с пайпами, но в итоге он поставился. Кстати git работает как родной.</p>
 <p>Открываю новый терминал, открывается bash, смотрю /etc/passwd, там написано, что
@@ -158,7 +158,7 @@ apt-get при установке поругивается, но ставит.</
 <p>Открываю <code>mc</code>, он как бы работает, но после первого нажатия Enter курсоры перестают бегать.
 Выходим, идем дальше.</p>
 <h2 id="python">Python</h2>
-<pre><code>$ apt-get install python-pip python-dev
+<pre tabindex="0"><code>$ apt-get install python-pip python-dev
 </code></pre><p>Все поставилось.
 Смотрим pip:</p>
 <ul>
@@ -170,13 +170,13 @@ apt-get при установке поругивается, но ставит.</
 </ul>
 <h2 id="ssh">SSH</h2>
 <p>Тащим ключ с домашней машины</p>
-<pre><code>$ rsync popstas@home:/Users/popstas/.ssh/id_dsa ~/.ssh
+<pre tabindex="0"><code>$ rsync popstas@home:/Users/popstas/.ssh/id_dsa ~/.ssh
 </code></pre><p>Работает!</p>
 <p>Подключаюсь к удаленному хосту - тоже работает!
 Там зашел в <code>mc</code>, стало понятно, что глючит терминал: на удаленке курсоры тоже бегают плохо.
 Ок, терминал будет, потом.</p>
 <h2 id="php">PHP</h2>
-<pre><code>$ apt-get install php5-cli
+<pre tabindex="0"><code>$ apt-get install php5-cli
 </code></pre><p>PHP работает.
 Composer ставится, но при попытке установить им что-нибудь зависает.</p>
 <h2 id="nginx">Nginx</h2>
@@ -243,7 +243,6 @@ Composer ставится, но при попытке установить им 
         <div>Старее: <a class="related" href="https://blog.popstas.ru/blog/2016/04/07/windows-ubuntu-bash-insider-update-not-available/" title="Windows 10 build 14316 со встроенной Ubuntu и bash через программу Microsoft Insider Preview доступна не всем">Windows 10 build 14316 со встроенной Ubuntu и bash через программу Microsoft Insider Preview доступна не всем</a></div>
     
   </p>
-  
 </footer>
 
       </article>
@@ -314,6 +313,12 @@ Composer ставится, но при попытке установить им 
           
             
               <li class="post">
+                <a href="/blog/2022/02/22/github-projects-2021/">Мои проекты 2021: умный дом, журнал медитаций, календарь активностей</a>
+              </li>
+            
+          
+            
+              <li class="post">
                 <a href="/blog/2022/01/29/content-2021/">Мой контент 2021: книги, музыка, фильмы, подкасты, каналы</a>
               </li>
             
@@ -354,12 +359,6 @@ Composer ставится, но при попытке установить им 
               </li>
             
           
-            
-              <li class="post">
-                <a href="/blog/2020/05/20/den-arieli-predskazuemaya-irracionalnost/">Содержание книги Дэна Ариели «Предсказуемая иррациональность»</a>
-              </li>
-            
-          
         </ul>
       </section>
     
@@ -370,7 +369,7 @@ Composer ставится, но при попытке установить им 
 </div>
 
     <footer role="contentinfo">
-      <p>Copyright &copy; 2015-2022 Stanislav Popov -
+      <p>Copyright &copy; 2015-2026 Stanislav Popov -
         <span class="credit">Powered by <a target="_blank" href="https://gohugo.io">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/">Hugo-Octopress</a> theme.
       </p>
     </footer>

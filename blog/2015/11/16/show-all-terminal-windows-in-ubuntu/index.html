@@ -69,7 +69,7 @@
   <meta name="author" content="Stanislav Popov">
 
   
-  <meta name="generator" content="Hugo 0.66.0" />
+  <meta name="generator" content="Hugo 0.164.0">
 
   
   
@@ -157,23 +157,23 @@
 <li>активировать каждое из окон</li>
 </ul>
 <p>Для манипуляции с окнами из консоли использовал <code>xdotool</code>:</p>
-<pre><code>sudo aptitude install xdotool
+<pre tabindex="0"><code>sudo aptitude install xdotool
 </code></pre><p>Через полчаса родился страшный однострочник, в итоге из него получился такой скрипт:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># !/bin/bash</span>
-# 
-<span style="color:#75715e"># Activate all windows with process name of currently active window</span>
-
-<span style="color:#75715e"># Получить текущее активное окно, его pid, имя процесса</span>
-current_pid<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>xdotool getwindowpid <span style="color:#66d9ef">$(</span>xdotool getactivewindow<span style="color:#66d9ef">))</span>
-current_name<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>ps -p $current_pid -o comm<span style="color:#f92672">=</span><span style="color:#66d9ef">)</span>
-clean_name<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>current_name%-<span style="color:#e6db74">}</span>
-
-name<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>1<span style="color:#66d9ef">:-</span>$clean_name<span style="color:#e6db74">}</span>
-
-<span style="color:#75715e"># найти окна процесса (только видимые), активировать каждое из них</span>
-xdotool search --onlyvisible --class <span style="color:#e6db74">&#34;</span>$name<span style="color:#e6db74">&#34;</span> <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>  | xargs -L1 --no-run-if-empty xdotool windowactivate
-</code></pre></div><h3 id="какие-были-проблемы">Какие были проблемы:</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># !/bin/bash</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Activate all windows with process name of currently active window</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Получить текущее активное окно, его pid, имя процесса</span>
+</span></span><span style="display:flex;"><span>current_pid<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>xdotool getwindowpid <span style="color:#66d9ef">$(</span>xdotool getactivewindow<span style="color:#66d9ef">))</span>
+</span></span><span style="display:flex;"><span>current_name<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>ps -p $current_pid -o comm<span style="color:#f92672">=</span><span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>clean_name<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>current_name%-<span style="color:#e6db74">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>name<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>1<span style="color:#66d9ef">:-</span>$clean_name<span style="color:#e6db74">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># найти окна процесса (только видимые), активировать каждое из них</span>
+</span></span><span style="display:flex;"><span>xdotool search --onlyvisible --class <span style="color:#e6db74">&#34;</span>$name<span style="color:#e6db74">&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  | xargs -L1 --no-run-if-empty xdotool windowactivate
+</span></span></code></pre></div><h3 id="какие-были-проблемы">Какие были проблемы:</h3>
 <ul>
 <li>У каждого процесса оказалось штук по 5 &ldquo;окон&rdquo;, которые на самом деле не видны</li>
 <li>Текущий процесс <code>gnome-terminal</code> виден в процессах как <code>gnome-terminal-server</code>,
@@ -238,7 +238,6 @@ xdotool search --onlyvisible --class <span style="color:#e6db74">&#34;</span>$na
 
     
   </p>
-  
 </footer>
 
       </article>
@@ -309,6 +308,12 @@ xdotool search --onlyvisible --class <span style="color:#e6db74">&#34;</span>$na
           
             
               <li class="post">
+                <a href="/blog/2022/02/22/github-projects-2021/">Мои проекты 2021: умный дом, журнал медитаций, календарь активностей</a>
+              </li>
+            
+          
+            
+              <li class="post">
                 <a href="/blog/2022/01/29/content-2021/">Мой контент 2021: книги, музыка, фильмы, подкасты, каналы</a>
               </li>
             
@@ -349,12 +354,6 @@ xdotool search --onlyvisible --class <span style="color:#e6db74">&#34;</span>$na
               </li>
             
           
-            
-              <li class="post">
-                <a href="/blog/2020/05/20/den-arieli-predskazuemaya-irracionalnost/">Содержание книги Дэна Ариели «Предсказуемая иррациональность»</a>
-              </li>
-            
-          
         </ul>
       </section>
     
@@ -365,7 +364,7 @@ xdotool search --onlyvisible --class <span style="color:#e6db74">&#34;</span>$na
 </div>
 
     <footer role="contentinfo">
-      <p>Copyright &copy; 2015-2022 Stanislav Popov -
+      <p>Copyright &copy; 2015-2026 Stanislav Popov -
         <span class="credit">Powered by <a target="_blank" href="https://gohugo.io">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/">Hugo-Octopress</a> theme.
       </p>
     </footer>

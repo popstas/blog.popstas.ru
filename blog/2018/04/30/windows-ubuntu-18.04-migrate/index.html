@@ -65,7 +65,7 @@ UPD 13.07.2018: цикл статей оборвался из-за того, ч�
   <meta name="author" content="Stanislav Popov">
 
   
-  <meta name="generator" content="Hugo 0.66.0" />
+  <meta name="generator" content="Hugo 0.164.0">
 
   
   
@@ -139,7 +139,7 @@ UPD 13.07.2018: цикл статей оборвался из-за того, ч�
           
           
           <p>26.04.2018 вышла новая Ubuntu 18.04 LTS, и по традиции я решил попробовать на нее переехать, этот пост - отчет о переезде.</p>
-<p>Решил не писать один пост месяц, а то будет как в тот раз (например, аналогичный пост по переезду на MacOS так никогда и не вышел, остался на gist - <a href="https://gist.github.com/popstas/d0fdf4cd5c37dc5b8d93),">https://gist.github.com/popstas/d0fdf4cd5c37dc5b8d93),</a> несколько других похожих постов вообще остались лежать на локалке.</p>
+<p>Решил не писать один пост месяц, а то будет как в тот раз (например, аналогичный пост по переезду на MacOS так никогда и не вышел, остался на gist - <a href="https://gist.github.com/popstas/d0fdf4cd5c37dc5b8d93)">https://gist.github.com/popstas/d0fdf4cd5c37dc5b8d93)</a>, несколько других похожих постов вообще остались лежать на локалке.</p>
 <p>Так что буду писать по мере наступания на грабли и пополнять статью.</p>
 <p>UPD 13.07.2018: цикл статей оборвался из-за того, что я не смог побороть глюк Nvidia (см. комменты) и вернулся на Windows. Можно сказать, что это был такой сложный способ найти крутую скриншотилку Monosnap :)</p>
 <p><img src="/images/2018-04/windows-ubuntu.jpg" alt="from windows to ubuntu"></p>
@@ -205,11 +205,11 @@ UPD 13.07.2018: цикл статей оборвался из-за того, ч�
 <h3 id="спящий-режим">Спящий режим</h3>
 <h4 id="компьютер-просыпается-сразу-после-засыпания">Компьютер просыпается сразу после засыпания</h4>
 <p>Нужно отключить все триггеры. Определяем устройства, которые могут будить:</p>
-<pre><code>cat  /proc/acpi/wakeup | grep enabled
+<pre tabindex="0"><code>cat  /proc/acpi/wakeup | grep enabled
 GLAN  S4 *enabled   pci:0000:00:1f.6
 XHC   S4 *enabled   pci:0000:00:14.0
 </code></pre><p>После чего отправляем туда же имена этих устройств:</p>
-<pre><code>echo GLAN &gt; /proc/acpi/wakeup
+<pre tabindex="0"><code>echo GLAN &gt; /proc/acpi/wakeup
 echo XHC &gt; /proc/acpi/wakeup
 </code></pre><p>Мне это помогло.</p>
 <h2 id="настройка-софта">Настройка софта</h2>
@@ -285,7 +285,6 @@ echo XHC &gt; /proc/acpi/wakeup
         <div>Старее: <a class="related" href="https://blog.popstas.ru/blog/2018/03/01/planfix-toggl-integration/" title="Интеграция Планфикса и Toggl для учета времени">Интеграция Планфикса и Toggl для учета времени</a></div>
     
   </p>
-  
 </footer>
 
       </article>
@@ -356,6 +355,12 @@ echo XHC &gt; /proc/acpi/wakeup
           
             
               <li class="post">
+                <a href="/blog/2022/02/22/github-projects-2021/">Мои проекты 2021: умный дом, журнал медитаций, календарь активностей</a>
+              </li>
+            
+          
+            
+              <li class="post">
                 <a href="/blog/2022/01/29/content-2021/">Мой контент 2021: книги, музыка, фильмы, подкасты, каналы</a>
               </li>
             
@@ -396,12 +401,6 @@ echo XHC &gt; /proc/acpi/wakeup
               </li>
             
           
-            
-              <li class="post">
-                <a href="/blog/2020/05/20/den-arieli-predskazuemaya-irracionalnost/">Содержание книги Дэна Ариели «Предсказуемая иррациональность»</a>
-              </li>
-            
-          
         </ul>
       </section>
     
@@ -412,7 +411,7 @@ echo XHC &gt; /proc/acpi/wakeup
 </div>
 
     <footer role="contentinfo">
-      <p>Copyright &copy; 2015-2022 Stanislav Popov -
+      <p>Copyright &copy; 2015-2026 Stanislav Popov -
         <span class="credit">Powered by <a target="_blank" href="https://gohugo.io">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/">Hugo-Octopress</a> theme.
       </p>
     </footer>

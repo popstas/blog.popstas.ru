@@ -65,7 +65,7 @@
   <meta name="author" content="Stanislav Popov">
 
   
-  <meta name="generator" content="Hugo 0.66.0" />
+  <meta name="generator" content="Hugo 0.164.0">
 
   
   
@@ -151,7 +151,7 @@
 <img loading="lazy" src="https://habrastorage.org/files/243/a01/1ed/243a011ed04f455099a4ba64a87736f6.png" title="" alt="" />
 <p>Слева мы видим стек слоев для чтения. Они показаны только для понимания внутреннего устройства, они доступны вне запущенного контейнера на хост-системе. Важно то, что они доступны только для чтения (иммутабельны), а все изменения происходят в верхнем слое стека. Каждый слой может иметь одного родителя, родитель тоже имеет родителя и т.д. Слой верхнего уровня может быть использован как UnionFS (AUFS в моем случае с docker) и представлен в виде единой read-only файловой системы, в которой отражены все слои. Мы видим эту &ldquo;сущность&rdquo; образа на рисунке справа.</p>
 <p>Если вы захотите посмотреть на эти слои в первозданном виде, вы можете найти их в файловой системе на хост-машине. Они не видны напрямую из запущенного контейнера. На моей хост-машине я могу найти образы в /var/lib/docker/aufs.</p>
-<pre><code># sudo tree -L 1 /var/lib/docker/
+<pre tabindex="0"><code># sudo tree -L 1 /var/lib/docker/
 /var/lib/docker/
 ├── aufs
 ├── containers
@@ -175,9 +175,9 @@
 <p>Изоляция файловой системы обеспечивается технологиями уровня ядра, cgroups, namespaces и другие, позволяют докеру быть такой перспективной технологией. Процессы в пространстве контейнера могут изменять, удалять или создавать файлы, которые сохраняются в верхнем слое для записи. Смотрите изображение:</p>
 <img loading="lazy" src="https://habrastorage.org/files/f8e/bbf/e3b/f8ebbfe3b59346ee9cdb017b89fcb169.png" title="" alt="" />
 <p>Чтобы проверить это, выполните команду на хост-машине:</p>
-<pre><code>docker run ubuntu touch happiness.txt
+<pre tabindex="0"><code>docker run ubuntu touch happiness.txt
 </code></pre><p>Вы можете найти новый файл в слое для записи на хост-машине, даже если контейнер не запущен.</p>
-<pre><code># find / -name happiness.txt
+<pre tabindex="0"><code># find / -name happiness.txt
 /var/lib/docker/aufs/diff/860a7b...889/happiness.txt
 </code></pre><h2 id="определение-слоя-образа-image-layer">Определение слоя образа (Image layer)</h2>
 <p>Наконец, мы определим слой образа. Изображение ниже представляет слой образа и дает нам понять, что слой - это не просто изменения в файловой системе.</p>
@@ -188,24 +188,24 @@
 <img loading="lazy" src="https://habrastorage.org/files/7e9/de2/c4f/7e9de2c4f537438c8f5357d09c398289.png" title="" alt="" />
 <h3 id="расположение-метаданных">Расположение метаданных</h3>
 <p>На данный момент (я понимаю, что разработчики docker могут позже сменить реализацию), метаданные слоев образов (для чтения) находятся в файле с именем &ldquo;json&rdquo; в папке /var/lib/docker/graph/id_слоя:</p>
-<pre><code>/var/lib/docker/graph/e809f156dc985.../json
+<pre tabindex="0"><code>/var/lib/docker/graph/e809f156dc985.../json
 </code></pre><p>где &ldquo;e809f156dc985&hellip;&rdquo; - урезанный id слоя.</p>
 <h2 id="свяжем-все-вместе">Свяжем все вместе</h2>
 <p>Теперь, давайте посмотрим на команды, иллюстрированные понятными картинками.</p>
-<h3 id="docker-create-image-id">docker create <!-- raw HTML omitted --></h3>
+<h3 id="docker-create">docker create <!-- raw HTML omitted --></h3>
 <p>До:</p>
 <img loading="lazy" src="https://habrastorage.org/files/71a/d30/a1e/71ad30a1e0b04cb09db3e25c741ef7a8.png" title="" alt="" />
 <p>После:</p>
 <img loading="lazy" src="https://habrastorage.org/files/bdc/1cc/f14/bdc1ccf14b1c4702afe71cbd27a1574b.png" title="" alt="" />
 <p>Команда <code>docker create</code> добавляет слой для записи наверх стека слоев, найденного по <!-- raw HTML omitted -->. Команда не запускает контейнер.</p>
 <img loading="lazy" src="https://habrastorage.org/files/12c/8d5/606/12c8d56068c5416e8ca003b532ef3cdb.png" title="" alt="" />
-<h3 id="docker-start-container-id">docker start <!-- raw HTML omitted --></h3>
+<h3 id="docker-start">docker start <!-- raw HTML omitted --></h3>
 <p>До:</p>
 <img loading="lazy" src="https://habrastorage.org/files/bdc/1cc/f14/bdc1ccf14b1c4702afe71cbd27a1574b.png" title="" alt="" />
 <p>После:</p>
 <img loading="lazy" src="https://habrastorage.org/files/730/6c4/4cd/7306c44cdfdd4ead9f1f073d91dd312c.png" title="" alt="" />
 <p>Команда <code>docker start</code> создает пространство процессов вокруг слоев контейнера. Может быть только одно пространство процессов на один контейнер.</p>
-<h3 id="docker-run-image-id">docker run <!-- raw HTML omitted --></h3>
+<h3 id="docker-run">docker run <!-- raw HTML omitted --></h3>
 <p>До:</p>
 <img loading="lazy" src="https://habrastorage.org/files/71a/d30/a1e/71ad30a1e0b04cb09db3e25c741ef7a8.png" title="" alt="" />
 <p>После:</p>
@@ -226,37 +226,37 @@
 <h3 id="docker-images--a">docker images -a</h3>
 <img loading="lazy" src="https://habrastorage.org/files/5b6/6a9/fd9/5b66a9fd93ce4157b3cfa48984a5ca0d.png" title="" alt="" />
 <p>Команда <code>docker images -a</code> выводит все образы на хост-машине. Это фактически список всех слоев для чтения в системе. Если вы хотите увидеть все слои одного образа, воспользуйтесь командой <code>docker history</code>.</p>
-<h3 id="docker-stop-container-id">docker stop <!-- raw HTML omitted --></h3>
+<h3 id="docker-stop">docker stop <!-- raw HTML omitted --></h3>
 <p>До:</p>
 <img loading="lazy" src="https://habrastorage.org/files/f34/430/e32/f34430e3231842e3b748d337993e9338.png" title="" alt="" />
 <p>После:</p>
 <img loading="lazy" src="https://habrastorage.org/files/bdc/1cc/f14/bdc1ccf14b1c4702afe71cbd27a1574b.png" title="" alt="" />
 <p>Команда <code>docker stop</code> посылает сигнал SIGTERM запущенному контейнеру, что мягко останавливает все процессы в пространстве процессов контейнера. В результате мы получаем не запущенный контейнер.</p>
-<h3 id="docker-kill-container-id">docker kill <!-- raw HTML omitted --></h3>
+<h3 id="docker-kill">docker kill <!-- raw HTML omitted --></h3>
 <p>До:</p>
 <img loading="lazy" src="https://habrastorage.org/files/ef8/c77/3c3/ef8c773c34454292b76f798482e15463.png" title="" alt="" />
 <p>После:</p>
 <img loading="lazy" src="https://habrastorage.org/files/bdc/1cc/f14/bdc1ccf14b1c4702afe71cbd27a1574b.png" title="" alt="" />
 <p>Команда <code>docker kill</code> посылает сигнал SIGKILL, что немедленно завершает все процессы в текущем контейнере. Это почти то же самое, что нажать Ctrl+\ в терминале.</p>
-<h3 id="docker-pause-container-id">docker pause <!-- raw HTML omitted --></h3>
+<h3 id="docker-pause">docker pause <!-- raw HTML omitted --></h3>
 <p>До:</p>
 <img loading="lazy" src="https://habrastorage.org/files/63d/de7/ed4/63dde7ed482544e0afcc2925eabc1e3d.png" title="" alt="" />
 <p>После:</p>
 <img loading="lazy" src="https://habrastorage.org/files/70d/208/439/70d208439a1944739c5e06e716ab1975.png" title="" alt="" />
 <p>В отличие от <code>docker stop</code> и <code>docker kill</code>, которые посылают настоящие UNIX сигналы процессам контейнера, команда <code>docker pause</code> используют специальную возможность cgroups для заморозки запущенного пространства процессов. Подробности можно прочитать <a href="https://www.kernel.org/doc/Documentation/cgroups/freezer-subsystem.txt">здесь</a>, если вкратце, отправки сигнала Ctrl+Z (SIGTSTP) не достаточно, чтобы заморозить все процессы в пространстве контейнера.</p>
-<h3 id="docker-rm-container-id">docker rm <!-- raw HTML omitted --></h3>
+<h3 id="docker-rm">docker rm <!-- raw HTML omitted --></h3>
 <p>До:</p>
 <img loading="lazy" src="https://habrastorage.org/files/92d/14d/d92/92d14dd9224043079a90ab80c4dbc6a6.png" title="" alt="" />
 <p>После:</p>
 <img loading="lazy" src="https://habrastorage.org/files/a36/292/8c4/a362928c4661422797d267560ff38182.png" title="" alt="" />
 <p>Команда <code>docker rm</code> удаляет слой для записи, который определяет контейнер на хост-системе. Должна быть запущена на остановленном контейнерах. Удаляет файлы.</p>
-<h3 id="docker-rmi-image-id">docker rmi <!-- raw HTML omitted --></h3>
+<h3 id="docker-rmi">docker rmi <!-- raw HTML omitted --></h3>
 <p>До:</p>
 <img loading="lazy" src="https://habrastorage.org/files/4c2/eb5/26a/4c2eb526a35e4751a5302c954370a0fa.png" title="" alt="" />
 <p>После:</p>
 <img loading="lazy" src="https://habrastorage.org/files/3a2/145/38a/3a214538a6e54e009f704825109393a1.png" title="" alt="" />
 <p>Команда <code>docker rmi</code> удаляет слой для чтения, который определяет &ldquo;сущность&rdquo; образа. Она удаляет образ с хост-системы, но образ все еще может быть получен из репозитория через <code>docker pull</code>. Вы можете использовать <code>docker rmi</code> только для слоев верхнего уровня (или образов), для удаления промежуточных слоев нужно использовать <code>docker rmi -f</code>.</p>
-<h3 id="docker-commit-container-id">docker commit <!-- raw HTML omitted --></h3>
+<h3 id="docker-commit">docker commit <!-- raw HTML omitted --></h3>
 <p>До:</p>
 <p><img loading="lazy" src="https://habrastorage.org/files/7d0/ec4/104/7d0ec41049b34238bb785e28897e28f0.png" title="" alt="" /> или <img loading="lazy" src="https://habrastorage.org/files/325/e8e/270/325e8e27098e4cdeb956634361879388.png" title="" alt="" /></p>
 <p>После:</p>
@@ -278,31 +278,31 @@
 <li>делает commit
 На каждой итерации создается новый слой. При исполнении <code>docker build</code> может создаваться множество слоев.</li>
 </ol>
-<h3 id="docker-exec-running-container-id">docker exec <!-- raw HTML omitted --></h3>
+<h3 id="docker-exec">docker exec <!-- raw HTML omitted --></h3>
 <p>До:</p>
 <img loading="lazy" src="https://habrastorage.org/files/7d0/ec4/104/7d0ec41049b34238bb785e28897e28f0.png" title="" alt="" />
 <p>После:</p>
 <img loading="lazy" src="https://habrastorage.org/files/4d6/cd5/21e/4d6cd521ee4d47e68d89e9ce77c8a6ca.png" title="" alt="" />
 <p>Команда <code>docker exec</code> применяется к запущенному контейнеру, запускает новый процесс внутри пространства процессов контейнера.</p>
-<h3 id="docker-inspect-container-id--image-id">docker inspect <!-- raw HTML omitted --> | <!-- raw HTML omitted --></h3>
+<h3 id="docker-inspect--">docker inspect <!-- raw HTML omitted --> | <!-- raw HTML omitted --></h3>
 <p>До:</p>
 <p><img loading="lazy" src="https://habrastorage.org/files/74c/7ee/e53/74c7eee53b8f4ed8a2a606e87571fe3a.png" title="" alt="" /> или <img loading="lazy" src="https://habrastorage.org/files/242/b58/b68/242b58b68acd4580b226569d81d613e5.png" title="" alt="" /></p>
 <p>После:</p>
 <img loading="lazy" src="https://habrastorage.org/files/898/5e8/e54/8985e8e5467a42769988a4351d0c0828.png" title="" alt="" />
 <p>Команда <code>docker inspect</code> получает метаданные верхнего слоя контейнера или образа.</p>
-<h3 id="docker-save-image-id">docker save <!-- raw HTML omitted --></h3>
+<h3 id="docker-save">docker save <!-- raw HTML omitted --></h3>
 <p>До:</p>
 <img loading="lazy" src="https://habrastorage.org/files/f2a/b8d/70d/f2ab8d70de7a4ca4959f6a7bf1fb11e3.png" title="" alt="" />
 <p>После:</p>
 <img loading="lazy" src="https://habrastorage.org/files/d5d/bf7/3f0/d5dbf73f0f2d4d72b0ed38309e2c6a6b.png" title="" alt="" />
 <p>Команда <code>docker save</code> создает один файл, который может быть использован для импорта образа на другую хост-систему. В отличие от команды <code>export</code>, она сохраняет все слои и их метаданные. Может быть применена только к образам.</p>
-<h3 id="docker-export-container-id">docker export <!-- raw HTML omitted --></h3>
+<h3 id="docker-export">docker export <!-- raw HTML omitted --></h3>
 <p>До:</p>
 <img loading="lazy" src="https://habrastorage.org/files/a7f/3f4/717/a7f3f47170084dc2b75dd73e8d6a5cbb.png" title="" alt="" />
 <p>После:</p>
 <img loading="lazy" src="https://habrastorage.org/files/36d/807/ed6/36d807ed6b304333b31f658dfb5c4326.png" title="" alt="" />
 <p>Команда <code>docker export</code> создает tar архив с содержимым файлов контейнера, в результате получается папка, пригодная для использования вне docker. Команда убирает слои и их метаданные. Может быть применена только для контейнеров.</p>
-<h3 id="docker-history-image-id">docker history <!-- raw HTML omitted --></h3>
+<h3 id="docker-history">docker history <!-- raw HTML omitted --></h3>
 <p>До:</p>
 <img loading="lazy" src="https://habrastorage.org/files/428/150/afc/428150afc2574fd2bf32f1202c908f77.png" title="" alt="" />
 <p>После:</p>
@@ -368,7 +368,6 @@
         <div>Старее: <a class="related" href="https://blog.popstas.ru/blog/2016/02/25/big-touchpad-as-mouse-replacement/" title="Большой тачпад как замена мышки">Большой тачпад как замена мышки</a></div>
     
   </p>
-  
 </footer>
 
       </article>
@@ -439,6 +438,12 @@
           
             
               <li class="post">
+                <a href="/blog/2022/02/22/github-projects-2021/">Мои проекты 2021: умный дом, журнал медитаций, календарь активностей</a>
+              </li>
+            
+          
+            
+              <li class="post">
                 <a href="/blog/2022/01/29/content-2021/">Мой контент 2021: книги, музыка, фильмы, подкасты, каналы</a>
               </li>
             
@@ -479,12 +484,6 @@
               </li>
             
           
-            
-              <li class="post">
-                <a href="/blog/2020/05/20/den-arieli-predskazuemaya-irracionalnost/">Содержание книги Дэна Ариели «Предсказуемая иррациональность»</a>
-              </li>
-            
-          
         </ul>
       </section>
     
@@ -495,7 +494,7 @@
 </div>
 
     <footer role="contentinfo">
-      <p>Copyright &copy; 2015-2022 Stanislav Popov -
+      <p>Copyright &copy; 2015-2026 Stanislav Popov -
         <span class="credit">Powered by <a target="_blank" href="https://gohugo.io">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/">Hugo-Octopress</a> theme.
       </p>
     </footer>

@@ -63,7 +63,7 @@ timedatectl set-local-rtc 1
   <meta name="author" content="Stanislav Popov">
 
   
-  <meta name="generator" content="Hugo 0.66.0" />
+  <meta name="generator" content="Hugo 0.164.0">
 
   
   
@@ -138,11 +138,11 @@ timedatectl set-local-rtc 1
           
           <p>При перезагрузке из Ubuntu в Windows часы прыгают на разницу между Гринвичем и вашим часовым поясом. Нетрудно догадаться до причины: Ubuntu предполагает, что в BIOS часы настроены по UTC+0, а Windows считает, что там указано местное время.</p>
 <p>Не знаю, как это исправляется в Windows, но нетрудно найти <a href="https://help.ubuntu.com/community/UbuntuTime#Make_Linux_use_.27Local.27_time">решение в Ubuntu</a>:</p>
-<pre><code>timedatectl set-local-rtc 1
+<pre tabindex="0"><code>timedatectl set-local-rtc 1
 </code></pre><p>Не знаю точно, когда применяются настройки, может быть сразу или после перезагрузки. Если не помогло, проверьте, что у вас работает ntp:</p>
-<pre><code>ntpq -p
+<pre tabindex="0"><code>ntpq -p
 </code></pre><p>В результате команда timedatectl должна выдать все “yes” и local time == RTC time:</p>
-<pre><code>$ timedatectl
+<pre tabindex="0"><code>$ timedatectl
                       Local time: Вт 2018-05-01 03:41:45 +05
                   Universal time: Пн 2018-04-30 22:41:45 UTC
                         RTC time: Вт 2018-05-01 03:41:45
@@ -209,7 +209,6 @@ systemd-timesyncd.service active: yes
         <div>Старее: <a class="related" href="https://blog.popstas.ru/blog/2018/05/01/seahorse-password-on-ubuntu-boot/" title="Не спрашивать пароль от связки ключей при каждой загрузке на Ubuntu 18.04">Не спрашивать пароль от связки ключей при каждой загрузке на Ubuntu 18.04</a></div>
     
   </p>
-  
 </footer>
 
       </article>
@@ -280,6 +279,12 @@ systemd-timesyncd.service active: yes
           
             
               <li class="post">
+                <a href="/blog/2022/02/22/github-projects-2021/">Мои проекты 2021: умный дом, журнал медитаций, календарь активностей</a>
+              </li>
+            
+          
+            
+              <li class="post">
                 <a href="/blog/2022/01/29/content-2021/">Мой контент 2021: книги, музыка, фильмы, подкасты, каналы</a>
               </li>
             
@@ -320,12 +325,6 @@ systemd-timesyncd.service active: yes
               </li>
             
           
-            
-              <li class="post">
-                <a href="/blog/2020/05/20/den-arieli-predskazuemaya-irracionalnost/">Содержание книги Дэна Ариели «Предсказуемая иррациональность»</a>
-              </li>
-            
-          
         </ul>
       </section>
     
@@ -336,7 +335,7 @@ systemd-timesyncd.service active: yes
 </div>
 
     <footer role="contentinfo">
-      <p>Copyright &copy; 2015-2022 Stanislav Popov -
+      <p>Copyright &copy; 2015-2026 Stanislav Popov -
         <span class="credit">Powered by <a target="_blank" href="https://gohugo.io">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/">Hugo-Octopress</a> theme.
       </p>
     </footer>

@@ -65,7 +65,7 @@ Ctrl&#43;R, Ctrl&#43;Shift&#43;R. При этом видно одновреме�
   <meta name="author" content="Stanislav Popov">
 
   
-  <meta name="generator" content="Hugo 0.66.0" />
+  <meta name="generator" content="Hugo 0.164.0">
 
   
   
@@ -145,30 +145,30 @@ Ctrl&#43;R, Ctrl&#43;Shift&#43;R. При этом видно одновреме�
 <p><img src="/images/2015-12/percol.gif" alt="zsh history percol"></p>
 <p>Собственно по ссылке выше готовый конфиг для zsh. Я немного изменил его под себя,
 чтобы использовать percol не только для поиска по истории:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#66d9ef">function</span> exists <span style="color:#f92672">{</span> which $1 &amp;&gt; /dev/null <span style="color:#f92672">}</span>
-<span style="color:#66d9ef">if</span> exists percol; <span style="color:#66d9ef">then</span>
-	<span style="color:#66d9ef">function</span> percol_select_history<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-		local tac
-		exists gtac <span style="color:#f92672">&amp;&amp;</span> tac<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;gtac&#34;</span> <span style="color:#f92672">||</span> <span style="color:#f92672">{</span> exists tac <span style="color:#f92672">&amp;&amp;</span> tac<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;tac&#34;</span> <span style="color:#f92672">||</span> <span style="color:#f92672">{</span> tac<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;tail -r&#34;</span> <span style="color:#f92672">}</span> <span style="color:#f92672">}</span>
-		BUFFER<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>fc -l -n <span style="color:#ae81ff">1</span> | eval $tac | percol --query <span style="color:#e6db74">&#34;</span>$LBUFFER<span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">)</span>
-		CURSOR<span style="color:#f92672">=</span>$#BUFFER         <span style="color:#75715e"># move cursor</span>
-		zle -R -c               <span style="color:#75715e"># refresh</span>
-	<span style="color:#f92672">}</span>
-
-	zle -N percol_select_history
-	bindkey <span style="color:#e6db74">&#39;^R&#39;</span> percol_select_history
-
-	<span style="color:#75715e"># percol based grep</span>
-	g<span style="color:#f92672">()</span> <span style="color:#f92672">{</span> percol --match-method regex --query<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$*<span style="color:#e6db74">&#34;</span>; <span style="color:#f92672">}</span>
-<span style="color:#66d9ef">fi</span>
-</code></pre></div><p>Код я добавил в <a href="https://github.com/popstas/zsh-config">свой .zshrc</a>. Если <a href="https://github.com/robbyrussell/oh-my-zsh/pull/4582">этот пулл реквест</a> примут, то данный код появится в составе
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> exists <span style="color:#f92672">{</span> which $1 &amp;&gt; /dev/null <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> exists percol; <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">function</span> percol_select_history<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>		local tac
+</span></span><span style="display:flex;"><span>		exists gtac <span style="color:#f92672">&amp;&amp;</span> tac<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;gtac&#34;</span> <span style="color:#f92672">||</span> <span style="color:#f92672">{</span> exists tac <span style="color:#f92672">&amp;&amp;</span> tac<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;tac&#34;</span> <span style="color:#f92672">||</span> <span style="color:#f92672">{</span> tac<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;tail -r&#34;</span> <span style="color:#f92672">}</span> <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>		BUFFER<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>fc -l -n <span style="color:#ae81ff">1</span> | eval $tac | percol --query <span style="color:#e6db74">&#34;</span>$LBUFFER<span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>		CURSOR<span style="color:#f92672">=</span>$#BUFFER         <span style="color:#75715e"># move cursor</span>
+</span></span><span style="display:flex;"><span>		zle -R -c               <span style="color:#75715e"># refresh</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	zle -N percol_select_history
+</span></span><span style="display:flex;"><span>	bindkey <span style="color:#e6db74">&#39;^R&#39;</span> percol_select_history
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e"># percol based grep</span>
+</span></span><span style="display:flex;"><span>	g<span style="color:#f92672">()</span> <span style="color:#f92672">{</span> percol --match-method regex --query<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$*<span style="color:#e6db74">&#34;</span>; <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">fi</span>
+</span></span></code></pre></div><p>Код я добавил в <a href="https://github.com/popstas/zsh-config">свой .zshrc</a>. Если <a href="https://github.com/robbyrussell/oh-my-zsh/pull/4582">этот пулл реквест</a> примут, то данный код появится в составе
 <a href="https://github.com/robbyrussell/oh-my-zsh">oh-my-zsh</a> в виде плагина <code>percol</code>.</p>
 <p>Код полностью взят со страницы percol, от себя добавил функцию g(), она кстати конфиликтует с плагином git для oh-my-zsh,
 зато теперь я могу писать что-то вроде:</p>
-<pre><code>find . -type file | g
+<pre tabindex="0"><code>find . -type file | g
 </code></pre><p>для интерактивного выбора результатов поиска и просто для замены grep. При этом доступен мультивыбор по <code>Ctrl+Space</code>.</p>
 <p>Пример посложнее:</p>
-<pre><code>vim $(find -name &quot;*.markdown&quot; | g)
+<pre tabindex="0"><code>vim $(find -name &#34;*.markdown&#34; | g)
 </code></pre><p>После запуска откроется список всех <code>.markdown</code> файлов в текущей и вложенных папках, выбранный файл сразу откроется в Vim.
 Это как будто у вас появилась возможность приделывать midnight commander к результатам поиска!</p>
 <p>Смотрите больше интересных примеров <a href="https://github.com/mooz/percol">на странице проекта</a>.</p>
@@ -233,7 +233,6 @@ Ctrl&#43;R, Ctrl&#43;Shift&#43;R. При этом видно одновреме�
         <div>Старее: <a class="related" href="https://blog.popstas.ru/blog/2015/11/22/simple-time-tracker/" title="Простой тайм-трекер для отслеживания потраченного времени">Простой тайм-трекер для отслеживания потраченного времени</a></div>
     
   </p>
-  
 </footer>
 
       </article>
@@ -304,6 +303,12 @@ Ctrl&#43;R, Ctrl&#43;Shift&#43;R. При этом видно одновреме�
           
             
               <li class="post">
+                <a href="/blog/2022/02/22/github-projects-2021/">Мои проекты 2021: умный дом, журнал медитаций, календарь активностей</a>
+              </li>
+            
+          
+            
+              <li class="post">
                 <a href="/blog/2022/01/29/content-2021/">Мой контент 2021: книги, музыка, фильмы, подкасты, каналы</a>
               </li>
             
@@ -344,12 +349,6 @@ Ctrl&#43;R, Ctrl&#43;Shift&#43;R. При этом видно одновреме�
               </li>
             
           
-            
-              <li class="post">
-                <a href="/blog/2020/05/20/den-arieli-predskazuemaya-irracionalnost/">Содержание книги Дэна Ариели «Предсказуемая иррациональность»</a>
-              </li>
-            
-          
         </ul>
       </section>
     
@@ -360,7 +359,7 @@ Ctrl&#43;R, Ctrl&#43;Shift&#43;R. При этом видно одновреме�
 </div>
 
     <footer role="contentinfo">
-      <p>Copyright &copy; 2015-2022 Stanislav Popov -
+      <p>Copyright &copy; 2015-2026 Stanislav Popov -
         <span class="credit">Powered by <a target="_blank" href="https://gohugo.io">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/">Hugo-Octopress</a> theme.
       </p>
     </footer>

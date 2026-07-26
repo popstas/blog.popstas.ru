@@ -59,7 +59,7 @@
   <meta name="author" content="Stanislav Popov">
 
   
-  <meta name="generator" content="Hugo 0.66.0" />
+  <meta name="generator" content="Hugo 0.164.0">
 
   
   
@@ -184,30 +184,30 @@
 <p>Сообщения от самой тестилки в чате помечаются цветной полосой.</p>
 <h4 id="синтаксис-scenariosyml">Синтаксис scenarios.yml</h4>
 <p>Пример одного теста в файле:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">&#34;где в конце&#34;: </span><span style="color:#75715e"># название теста</span>
-  - <span style="color:#e6db74">&#34;&#34;</span> <span style="color:#75715e"># пустая строка в запросе</span>
-  - Привет
-
-  - спортзал находится на этаже
-  - на этаже находится спортзал, поняла <span style="color:#75715e"># полное соответствие</span>
-
-  - где спортзал
-  - <span style="color:#66d9ef">tests</span>: [
-      { <span style="color:#66d9ef">contains</span>: на этаже }, <span style="color:#75715e"># содержит строку</span>
-      { <span style="color:#66d9ef">not_contains</span>: <span style="color:#e6db74">&#39;на улице&#39;</span> } <span style="color:#75715e"># не содержит строку</span>
-    ]
-
-  - спасибо
-  - <span style="color:#66d9ef">tests</span>:
-      - <span style="color:#66d9ef">one_of</span>: <span style="color:#75715e"># один из вариантов</span>
-        - Пожалуйста
-        - Всегда пожалуйста
-        - Не за что
-        - Обращайся!
-
-  - удали банан
-  - <span style="color:#66d9ef">tests: [ contains</span>: <span style="color:#e6db74">&#34;&#34;</span> ] <span style="color:#75715e"># пройдёт любой ответ</span>
-</code></pre></div><hr>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">&#34;где в конце&#34;: </span><span style="color:#75715e"># название теста</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#e6db74">&#34;&#34;</span> <span style="color:#75715e"># пустая строка в запросе</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">Привет</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">спортзал находится на этаже</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">на этаже находится спортзал, поняла</span> <span style="color:#75715e"># полное соответствие</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">где спортзал</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">tests</span>: [
+</span></span><span style="display:flex;"><span>      { <span style="color:#f92672">contains</span>: <span style="color:#ae81ff">на этаже },</span> <span style="color:#75715e"># содержит строку</span>
+</span></span><span style="display:flex;"><span>      { <span style="color:#f92672">not_contains</span>: <span style="color:#e6db74">&#39;на улице&#39;</span> } <span style="color:#75715e"># не содержит строку</span>
+</span></span><span style="display:flex;"><span>    ]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">спасибо</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">tests</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">one_of</span>: <span style="color:#75715e"># один из вариантов</span>
+</span></span><span style="display:flex;"><span>        - <span style="color:#ae81ff">Пожалуйста</span>
+</span></span><span style="display:flex;"><span>        - <span style="color:#ae81ff">Всегда пожалуйста</span>
+</span></span><span style="display:flex;"><span>        - <span style="color:#ae81ff">Не за что</span>
+</span></span><span style="display:flex;"><span>        - <span style="color:#ae81ff">Обращайся!</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">удали банан</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">tests</span>: <span style="color:#f92672">[ contains</span>: <span style="color:#e6db74">&#34;&#34;</span> ] <span style="color:#75715e"># пройдёт любой ответ</span>
+</span></span></code></pre></div><hr>
 <p>В итоге в первом навыке получилось 73 диалога. <a href="https://github.com/popstas/yandex-dialogs-whatis/blob/master/static/scenarios.yml">Все сценарии навыка</a>.</p>
 <p>На боевом навыке у меня тестирование 73 диалогов (404 реплики) проходит примерно за 30 секунд, на локалке за 15 секунд.</p>
 <p>Я покрыл все сценарии тестовыми диалогами, так я мог не боясь рефакторить код и обновлять версию SDK, сразу сообщая автору, в каких местах что сломалось (а ломалось каждый раз в разных).</p>
@@ -222,7 +222,7 @@
 <p>Потом захотелось прикрутить Travis CI, чтобы там гонялись те же тесты, что и в WebUI. так появился <a href="https://github.com/popstas/yandex-dialogs-tester">yandex-dialogs-tester</a>, там та же система тестов, но в виде отдельной либы.</p>
 <p>Больше об этом проектике нечего сказать, быстрый, но неудобный.</p>
 <h2 id="навык-список-покупок">Навык &ldquo;Список покупок&rdquo;</h2>
-<p>Когда я подавал навык на премию Алисы в феврале, мне посоветовали выделить часть, которая касается списка покупок в отдельный навык. Так появился &ldquo;<a href="https://dialogs.yandex.ru/store/skills/cc4b9921-vkusnyj-spisok">Вкусный список</a>&quot;.</p>
+<p>Когда я подавал навык на премию Алисы в феврале, мне посоветовали выделить часть, которая касается списка покупок в отдельный навык. Так появился &ldquo;<a href="https://dialogs.yandex.ru/store/skills/cc4b9921-vkusnyj-spisok">Вкусный список</a>&rdquo;.</p>
 <p>По сути всё уже было готово, я за вечер выбросил всё лишнее, переписал справку и запустил.</p>
 <p>Название было такое, потому что &ldquo;Список покупок&rdquo; занял какой-то киберсквоттер, но навык он не сделал, там была просто заглушка.</p>
 <p>Через какое-то время мне отдали нормальное название &ldquo;Список покупок&rdquo;.</p>
@@ -295,7 +295,6 @@
         <div>Старее: <a class="related" href="https://blog.popstas.ru/blog/2020/04/13/yandex-dialogs-whatis/" title="Навык для Алисы &#34;Вторая память&#34;: технические особенности">Навык для Алисы &#34;Вторая память&#34;: технические особенности</a></div>
     
   </p>
-  
 </footer>
 
       </article>
@@ -366,6 +365,12 @@
           
             
               <li class="post">
+                <a href="/blog/2022/02/22/github-projects-2021/">Мои проекты 2021: умный дом, журнал медитаций, календарь активностей</a>
+              </li>
+            
+          
+            
+              <li class="post">
                 <a href="/blog/2022/01/29/content-2021/">Мой контент 2021: книги, музыка, фильмы, подкасты, каналы</a>
               </li>
             
@@ -406,12 +411,6 @@
               </li>
             
           
-            
-              <li class="post">
-                <a href="/blog/2020/05/20/den-arieli-predskazuemaya-irracionalnost/">Содержание книги Дэна Ариели «Предсказуемая иррациональность»</a>
-              </li>
-            
-          
         </ul>
       </section>
     
@@ -422,7 +421,7 @@
 </div>
 
     <footer role="contentinfo">
-      <p>Copyright &copy; 2015-2022 Stanislav Popov -
+      <p>Copyright &copy; 2015-2026 Stanislav Popov -
         <span class="credit">Powered by <a target="_blank" href="https://gohugo.io">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/">Hugo-Octopress</a> theme.
       </p>
     </footer>

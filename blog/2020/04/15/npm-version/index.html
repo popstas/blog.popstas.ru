@@ -61,7 +61,7 @@
   <meta name="author" content="Stanislav Popov">
 
   
-  <meta name="generator" content="Hugo 0.66.0" />
+  <meta name="generator" content="Hugo 0.164.0">
 
   
   
@@ -172,8 +172,8 @@
 <p>Минус в том, что создаются коммиты на каждую версию, кого-то это может раздражать, меня наоборот раздражает, что просматривая список коммитов на Github не видно версий, коммиты версий исправляют это.</p>
 <h4 id="как-делать-теги-123-вместо-v123-убрать-v-из-тега-версии">Как делать теги 1.2.3 вместо v1.2.3 (убрать <code>v</code> из тега версии):</h4>
 <p>Добавьте файл <code>.npmrc</code>, добавьте в него пустой <a href="https://docs.npmjs.com/misc/config#tag-version-prefix">tag-version-prefix</a>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">tag-version-prefix<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>
-</code></pre></div><p>Дальше - интереснее.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>tag-version-prefix<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>
+</span></span></code></pre></div><p>Дальше - интереснее.</p>
 <h2 id="автоматический-changelog">Автоматический Changelog</h2>
 <p>CHANGELOG.md генерится утилитой <a href="https://github.com/conventional-changelog/conventional-changelog">conventional-changelog</a>.</p>
 <p>Об этом я уже <a href="/blog/2016/03/06/changelog-dot-md-generate-from-git-conventions/">писал</a> 4 года назад. Там я описывал свои поиски, здесь опишу, к чему я пришёл.</p>
@@ -182,16 +182,16 @@
 <p>Пишите <code>feat: новая фича</code> или <code>fix: исправлен баг такой-то</code>. Этого уже достаточно, чтобы генерить красивые истории изменений.</p>
 <p>Подробнее, насколько я пользуюсь:</p>
 <p>Сообщение имеет структуру:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">type<span style="color:#f92672">(</span>scope<span style="color:#f92672">)</span>: subject
-
-body
-
-footer
-</code></pre></div><p>Я обычно ограничиваюсь:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">type: subject
-
-body
-</code></pre></div><h4 id="типы-в-порядке-как-я-использую">Типы, в порядке, как я использую:</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>type<span style="color:#f92672">(</span>scope<span style="color:#f92672">)</span>: subject
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>body
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>footer
+</span></span></code></pre></div><p>Я обычно ограничиваюсь:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>type: subject
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>body
+</span></span></code></pre></div><h4 id="типы-в-порядке-как-я-использую">Типы, в порядке, как я использую:</h4>
 <ul>
 <li><code>feat</code> - новый функционал</li>
 <li><code>fix</code> - исправления ошибок</li>
@@ -205,25 +205,25 @@ body
 <p>В футере принято перечислять ссылки на связанные задачи.</p>
 <p>Если в футер добавить <code>BREAKING CHANGE: что-то ломающее обратную совместимость</code>, то это также попадёт в changelog. По semver принято менять мажорную версию, если случился BREAKING CHANGE, но я не придерживаюсь строго.</p>
 <p>В <code>package.json</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
-  <span style="color:#f92672">&#34;scripts&#34;</span>: {
-    <span style="color:#f92672">&#34;version&#34;</span>: <span style="color:#e6db74">&#34;npm run changelog &amp;&amp; git add CHANGELOG.md&#34;</span>,
-    <span style="color:#f92672">&#34;changelog&#34;</span>: <span style="color:#e6db74">&#34;conventional-changelog -p angular -i CHANGELOG.md -s -r 0&#34;</span>
-  }
-}
-</code></pre></div><p>CHANGELOG.md при таком конфиге попадёт в коммит версии, что удобно, да и коммиты версий становятся не такими уж бесполезными.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;scripts&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;version&#34;</span>: <span style="color:#e6db74">&#34;npm run changelog &amp;&amp; git add CHANGELOG.md&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;changelog&#34;</span>: <span style="color:#e6db74">&#34;conventional-changelog -p angular -i CHANGELOG.md -s -r 0&#34;</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>CHANGELOG.md при таком конфиге попадёт в коммит версии, что удобно, да и коммиты версий становятся не такими уж бесполезными.</p>
 <p>Можно поставить <a href="https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/standard-changelog"><code>standard-changelog</code></a> чисто под ангуларовский формат, я по историческим причинам его не использую.</p>
 <p><a href="https://github.com/popstas/chords-viewer/blob/master/CHANGELOG.md">Пример CHANGELOG.md</a></p>
 <h2 id="красивые-releases-на-github">Красивые releases на Github</h2>
 <p><a href="https://github.com/conventional-changelog/releaser-tools">conventional-github-releaser</a> использует тот же механизм извлечения описания из коммитов, но пишет не в файл, а в релиз на Github.</p>
 <p>В <code>package.json</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
-  <span style="color:#f92672">&#34;scripts&#34;</span>: {
-    <span style="color:#f92672">&#34;postversion&#34;</span>: <span style="color:#e6db74">&#34;git push &amp;&amp; npm run release&#34;</span>,
-    <span style="color:#f92672">&#34;release&#34;</span>: <span style="color:#e6db74">&#34;conventional-github-releaser -p angular&#34;</span>
-  }
-}
-</code></pre></div><p>Вы можете не хотеть автоматом запускать <code>release</code> при версионировании, тогда думаю вы знаете, что делать.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;scripts&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;postversion&#34;</span>: <span style="color:#e6db74">&#34;git push &amp;&amp; npm run release&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;release&#34;</span>: <span style="color:#e6db74">&#34;conventional-github-releaser -p angular&#34;</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Вы можете не хотеть автоматом запускать <code>release</code> при версионировании, тогда думаю вы знаете, что делать.</p>
 <p>Не помню, обязательно ли пушить перед запуском <code>conventional-github-releaser</code>, скорее да, чем нет, я всегда пушу.</p>
 <h3 id="подмена-версий-в-коде">Подмена версий в коде</h3>
 <p>Что если нужно поменять версию не только в <code>package.json</code>? Тогда нужно писать скрипты.</p>
@@ -232,93 +232,93 @@ body
 <p><a href="https://github.com/viasite/planfix-toggl-server/blob/master/package.json">Отсюда</a> (это кстати проект на Go)</p>
 <p>Универсальный вариант на JavaScript из 2 файлов: первый меняет в README.md версию на токен на этапе <code>preversion</code> (на нём в package.json ещё старая версия), второй на этапе <code>version</code> меняет токен на новую версию. Регулярка получается универсальной, не надо подгонять под каждый файл.</p>
 <p>version-replace-pre.js:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">// заменяет старую версию в README.md на строку &#34;{{version}}&#34;
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">fs</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;fs&#39;</span>);
-<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">packageJson</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;../package.json&#39;</span>);
-
-<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">str</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">fs</span>.<span style="color:#a6e22e">readFileSync</span>(<span style="color:#e6db74">&#39;README.md&#39;</span>, <span style="color:#e6db74">&#39;utf8&#39;</span>);
-<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">regex</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> RegExp(<span style="color:#a6e22e">packageJson</span>.<span style="color:#a6e22e">version</span>.<span style="color:#a6e22e">replace</span>(<span style="color:#e6db74">/\./g</span>, <span style="color:#e6db74">&#39;\\.&#39;</span>), <span style="color:#e6db74">&#39;g&#39;</span>);
-<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">replaced</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">str</span>.<span style="color:#a6e22e">replace</span>(<span style="color:#a6e22e">regex</span>, <span style="color:#e6db74">&#39;{{version}}&#39;</span>);
-<span style="color:#a6e22e">fs</span>.<span style="color:#a6e22e">writeFileSync</span>(<span style="color:#e6db74">&#39;README.md&#39;</span>, <span style="color:#a6e22e">replaced</span>, <span style="color:#e6db74">&#39;utf8&#39;</span>);
-</code></pre></div><p>version-replace.js:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">// заменяет строку &#34;{{version}}&#34; в README.md на новую версию
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">fs</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;fs&#39;</span>);
-<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">packageJson</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;../package.json&#39;</span>);
-
-<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">str</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">fs</span>.<span style="color:#a6e22e">readFileSync</span>(<span style="color:#e6db74">&#39;README.md&#39;</span>, <span style="color:#e6db74">&#39;utf8&#39;</span>);
-<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">replaced</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">str</span>.<span style="color:#a6e22e">replace</span>(<span style="color:#e6db74">/\{\{version\}\}/g</span>, <span style="color:#a6e22e">packageJson</span>.<span style="color:#a6e22e">version</span>);
-<span style="color:#a6e22e">fs</span>.<span style="color:#a6e22e">writeFileSync</span>(<span style="color:#e6db74">&#39;README.md&#39;</span>, <span style="color:#a6e22e">replaced</span>, <span style="color:#e6db74">&#39;utf8&#39;</span>);
-</code></pre></div><p>package.json:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">{
-  <span style="color:#e6db74">&#34;scripts&#34;</span><span style="color:#f92672">:</span> {
-    <span style="color:#e6db74">&#34;preversion&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;node scripts/version-replace-pre.js&#34;</span>,
-    <span style="color:#e6db74">&#34;replace-version&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;node scripts/version-replace.js&#34;</span>,
-    <span style="color:#e6db74">&#34;version&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;npm run replace-version &amp;&amp; npm run changelog &amp;&amp; git add CHANGELOG.md README.md&#34;</span>
-  }
-}
-</code></pre></div><h4 id="поменять-версию-в-docker-composeyml">Поменять версию в docker-compose.yml</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#75715e">// заменяет старую версию в README.md на строку &#34;{{version}}&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">fs</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;fs&#39;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">packageJson</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;../package.json&#39;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">str</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">fs</span>.<span style="color:#a6e22e">readFileSync</span>(<span style="color:#e6db74">&#39;README.md&#39;</span>, <span style="color:#e6db74">&#39;utf8&#39;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">regex</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> RegExp(<span style="color:#a6e22e">packageJson</span>.<span style="color:#a6e22e">version</span>.<span style="color:#a6e22e">replace</span>(<span style="color:#e6db74">/\./g</span>, <span style="color:#e6db74">&#39;\\.&#39;</span>), <span style="color:#e6db74">&#39;g&#39;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">replaced</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">str</span>.<span style="color:#a6e22e">replace</span>(<span style="color:#a6e22e">regex</span>, <span style="color:#e6db74">&#39;{{version}}&#39;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fs</span>.<span style="color:#a6e22e">writeFileSync</span>(<span style="color:#e6db74">&#39;README.md&#39;</span>, <span style="color:#a6e22e">replaced</span>, <span style="color:#e6db74">&#39;utf8&#39;</span>);
+</span></span></code></pre></div><p>version-replace.js:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#75715e">// заменяет строку &#34;{{version}}&#34; в README.md на новую версию
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">fs</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;fs&#39;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">packageJson</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;../package.json&#39;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">str</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">fs</span>.<span style="color:#a6e22e">readFileSync</span>(<span style="color:#e6db74">&#39;README.md&#39;</span>, <span style="color:#e6db74">&#39;utf8&#39;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">replaced</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">str</span>.<span style="color:#a6e22e">replace</span>(<span style="color:#e6db74">/\{\{version\}\}/g</span>, <span style="color:#a6e22e">packageJson</span>.<span style="color:#a6e22e">version</span>);
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fs</span>.<span style="color:#a6e22e">writeFileSync</span>(<span style="color:#e6db74">&#39;README.md&#39;</span>, <span style="color:#a6e22e">replaced</span>, <span style="color:#e6db74">&#39;utf8&#39;</span>);
+</span></span></code></pre></div><p>package.json:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-js" data-lang="js"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;scripts&#34;</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;preversion&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;node scripts/version-replace-pre.js&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;replace-version&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;node scripts/version-replace.js&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;version&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;npm run replace-version &amp;&amp; npm run changelog &amp;&amp; git add CHANGELOG.md README.md&#34;</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="поменять-версию-в-docker-composeyml">Поменять версию в docker-compose.yml</h4>
 <p><a href="https://github.com/popstas/yandex-dialogs-products-shop-list/blob/master/scripts/docker-version.sh">Отсюда</a>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/bin/bash
-</span><span style="color:#75715e"></span>set -eu
-version<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>cat package.json | grep <span style="color:#e6db74">&#39;&#34;version&#34;: &#34;[0-9]&#39;</span> | cut -d<span style="color:#e6db74">&#39;:&#39;</span> -f2  | cut -d<span style="color:#e6db74">&#39;&#34;&#39;</span> -f2<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
-echo <span style="color:#e6db74">&#34;</span>$version<span style="color:#e6db74">&#34;</span>
-sed -i <span style="color:#e6db74">&#39;s/shop-list:.*/shop-list:v&#39;</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>version<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">&#39;/g&#39;</span> docker-compose.yml
-</code></pre></div><h4 id="поменять-версию-в-userscript">Поменять версию в userscript</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e">#!/bin/bash
+</span></span></span><span style="display:flex;"><span>set -eu
+</span></span><span style="display:flex;"><span>version<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>cat package.json | grep <span style="color:#e6db74">&#39;&#34;version&#34;: &#34;[0-9]&#39;</span> | cut -d<span style="color:#e6db74">&#39;:&#39;</span> -f2  | cut -d<span style="color:#e6db74">&#39;&#34;&#39;</span> -f2<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;</span>$version<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>sed -i <span style="color:#e6db74">&#39;s/shop-list:.*/shop-list:v&#39;</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>version<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">&#39;/g&#39;</span> docker-compose.yml
+</span></span></code></pre></div><h4 id="поменять-версию-в-userscript">Поменять версию в userscript</h4>
 <p><a href="https://github.com/viasite/userscript-planfixfix/blob/master/scripts/version-update.sh">Отсюда</a>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/bin/bash
-</span><span style="color:#75715e"></span>set -eu
-version<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>cat package.json | grep <span style="color:#e6db74">&#39;&#34;version&#34;: &#34;[0-9]&#39;</span> | cut -d<span style="color:#e6db74">&#39;:&#39;</span> -f2  | cut -d<span style="color:#e6db74">&#39;&#34;&#39;</span> -f2<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
-echo <span style="color:#e6db74">&#34;</span>$version<span style="color:#e6db74">&#34;</span>
-sed -i <span style="color:#e6db74">&#39;s/@version.*/@version        &#39;</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>version<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">&#39;/g&#39;</span> planfixfix.user.js
-</code></pre></div><p><code>sed -i</code> на MacOS из коробки не работает, чтобы исправить, поставьте <code>brew install gnu-sed</code> и добавьте <code>alias sed=gsed</code> (это неточно, пишу по памяти).</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e">#!/bin/bash
+</span></span></span><span style="display:flex;"><span>set -eu
+</span></span><span style="display:flex;"><span>version<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>cat package.json | grep <span style="color:#e6db74">&#39;&#34;version&#34;: &#34;[0-9]&#39;</span> | cut -d<span style="color:#e6db74">&#39;:&#39;</span> -f2  | cut -d<span style="color:#e6db74">&#39;&#34;&#39;</span> -f2<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;</span>$version<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>sed -i <span style="color:#e6db74">&#39;s/@version.*/@version        &#39;</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>version<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">&#39;/g&#39;</span> planfixfix.user.js
+</span></span></code></pre></div><p><code>sed -i</code> на MacOS из коробки не работает, чтобы исправить, поставьте <code>brew install gnu-sed</code> и добавьте <code>alias sed=gsed</code> (это неточно, пишу по памяти).</p>
 <p>Скрипт надо добавить в секцию <code>scripts.version</code> вашего <code>package.json</code>, добавить изменённый файл в Git, чтобы он попал в коммит версии:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
-  <span style="color:#f92672">&#34;scripts&#34;</span>: {
-    <span style="color:#f92672">&#34;version&#34;</span>: <span style="color:#e6db74">&#34;bash scripts/version-update.sh &amp;&amp; git add changed-file.js&#34;</span>,
-  }
-}
-</code></pre></div><h2 id="публикация-в-npm">Публикация в NPM</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;scripts&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;version&#34;</span>: <span style="color:#e6db74">&#34;bash scripts/version-update.sh &amp;&amp; git add changed-file.js&#34;</span>,
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="публикация-в-npm">Публикация в NPM</h2>
 <p>Это нужно только js проектам и то далеко не всем. Тут всё просто: добавьте <code>npm publish</code> в секцию <code>scripts.release</code> вашего <code>package.json</code>.</p>
 <p>В <code>package.json</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
-  <span style="color:#f92672">&#34;scripts&#34;</span>: {
-    <span style="color:#f92672">&#34;postversion&#34;</span>: <span style="color:#e6db74">&#34;npm run release&#34;</span>,
-    <span style="color:#f92672">&#34;release&#34;</span>: <span style="color:#e6db74">&#34;npm publish&#34;</span>
-  }
-}
-</code></pre></div><h2 id="деплой-куда-угодно">Деплой куда угодно</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;scripts&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;postversion&#34;</span>: <span style="color:#e6db74">&#34;npm run release&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;release&#34;</span>: <span style="color:#e6db74">&#34;npm publish&#34;</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="деплой-куда-угодно">Деплой куда угодно</h2>
 <p>В секцию <code>release</code> можно вписать любой скрипт, который будет деплоить.</p>
 <p>Например, в одном моём проекте по <code>npm version</code> генерится статическое приложение и деплоится на Github Pages скриптом <a href="https://github.com/popstas/chords-viewer/blob/master/scripts/deploy.sh"><code>deploy.sh</code></a>.</p>
 <p>В <code>package.json</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
-  <span style="color:#f92672">&#34;scripts&#34;</span>: {
-    <span style="color:#f92672">&#34;postversion&#34;</span>: <span style="color:#e6db74">&#34;npm run release&#34;</span>,
-    <span style="color:#f92672">&#34;release&#34;</span>: <span style="color:#e6db74">&#34;npm run deploy&#34;</span>,
-    <span style="color:#f92672">&#34;deploy&#34;</span>: <span style="color:#e6db74">&#34;bash scripts/deploy.sh&#34;</span>
-  }
-}
-</code></pre></div><h2 id="не-только-javascript">Не только JavaScript</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;scripts&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;postversion&#34;</span>: <span style="color:#e6db74">&#34;npm run release&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;release&#34;</span>: <span style="color:#e6db74">&#34;npm run deploy&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;deploy&#34;</span>: <span style="color:#e6db74">&#34;bash scripts/deploy.sh&#34;</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="не-только-javascript">Не только JavaScript</h2>
 <p>Это неочевидно, но <code>npm version</code> можно использовать для проектов на любом языке, единственное условие: наличие <code>package.json</code>.</p>
 <p>Я, например, использовал такой способ для ведения CHANGELOG.md для некоторых сайтов на PHP.</p>
 <h3 id="пример-packagejson">Пример package.json</h3>
 <p>Типичный пример для моих новых проектов:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
-  <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;packagename&#34;</span>,
-  <span style="color:#f92672">&#34;version&#34;</span>: <span style="color:#e6db74">&#34;0.0.1&#34;</span>,
-  <span style="color:#f92672">&#34;description&#34;</span>: <span style="color:#e6db74">&#34;Description&#34;</span>,
-  <span style="color:#f92672">&#34;scripts&#34;</span>: {
-    <span style="color:#f92672">&#34;version&#34;</span>: <span style="color:#e6db74">&#34;npm run changelog &amp;&amp; git add CHANGELOG.md&#34;</span>,
-    <span style="color:#f92672">&#34;postversion&#34;</span>: <span style="color:#e6db74">&#34;git push &amp;&amp; npm run release&#34;</span>,
-    <span style="color:#f92672">&#34;changelog&#34;</span>: <span style="color:#e6db74">&#34;conventional-changelog -p angular -i CHANGELOG.md -s -r 0&#34;</span>,
-    <span style="color:#f92672">&#34;release&#34;</span>: <span style="color:#e6db74">&#34;conventional-github-releaser -p angular&#34;</span>
-  },
-  <span style="color:#f92672">&#34;author&#34;</span>: <span style="color:#e6db74">&#34;Stanislav Popov&#34;</span>,
-  <span style="color:#f92672">&#34;license&#34;</span>: <span style="color:#e6db74">&#34;ISC&#34;</span>
-}
-</code></pre></div><h3 id="установка-пакетов">Установка пакетов</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;packagename&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;version&#34;</span>: <span style="color:#e6db74">&#34;0.0.1&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;description&#34;</span>: <span style="color:#e6db74">&#34;Description&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;scripts&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;version&#34;</span>: <span style="color:#e6db74">&#34;npm run changelog &amp;&amp; git add CHANGELOG.md&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;postversion&#34;</span>: <span style="color:#e6db74">&#34;git push &amp;&amp; npm run release&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;changelog&#34;</span>: <span style="color:#e6db74">&#34;conventional-changelog -p angular -i CHANGELOG.md -s -r 0&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;release&#34;</span>: <span style="color:#e6db74">&#34;conventional-github-releaser -p angular&#34;</span>
+</span></span><span style="display:flex;"><span>  },
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;author&#34;</span>: <span style="color:#e6db74">&#34;Stanislav Popov&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;license&#34;</span>: <span style="color:#e6db74">&#34;ISC&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="установка-пакетов">Установка пакетов</h3>
 <p>Чтобы всё работало, нужно скачать эти утилиты:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">npm install -g conventional-changelog-cli conventional-github-releaser
-</code></pre></div><p>Не вижу смысла добавлять эти пакеты в зависимости, хотя раньше так делал.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>npm install -g conventional-changelog-cli conventional-github-releaser
+</span></span></code></pre></div><p>Не вижу смысла добавлять эти пакеты в зависимости, хотя раньше так делал.</p>
 <h3 id="если-в-процессе-npm-version-что-то-пошло-не-так">Если в процессе npm version что-то пошло не так</h3>
 <p>При отладке этих процессов вы неизбежно где-то ошибётесь и окажетесь в ситуации, когда сценарий не прошёл полностью, а коммит версии уже есть.</p>
 <p>Тогда надо откатывать:</p>
@@ -386,7 +386,6 @@ sed -i <span style="color:#e6db74">&#39;s/@version.*/@version        &#39;</span
         <div>Старее: <a class="related" href="https://blog.popstas.ru/blog/2020/04/14/yandex-dialogs/" title="Яндекс.Диалоги: как я делал навыки для Алисы и инструменты для разработки">Яндекс.Диалоги: как я делал навыки для Алисы и инструменты для разработки</a></div>
     
   </p>
-  
 </footer>
 
       </article>
@@ -457,6 +456,12 @@ sed -i <span style="color:#e6db74">&#39;s/@version.*/@version        &#39;</span
           
             
               <li class="post">
+                <a href="/blog/2022/02/22/github-projects-2021/">Мои проекты 2021: умный дом, журнал медитаций, календарь активностей</a>
+              </li>
+            
+          
+            
+              <li class="post">
                 <a href="/blog/2022/01/29/content-2021/">Мой контент 2021: книги, музыка, фильмы, подкасты, каналы</a>
               </li>
             
@@ -497,12 +502,6 @@ sed -i <span style="color:#e6db74">&#39;s/@version.*/@version        &#39;</span
               </li>
             
           
-            
-              <li class="post">
-                <a href="/blog/2020/05/20/den-arieli-predskazuemaya-irracionalnost/">Содержание книги Дэна Ариели «Предсказуемая иррациональность»</a>
-              </li>
-            
-          
         </ul>
       </section>
     
@@ -513,7 +512,7 @@ sed -i <span style="color:#e6db74">&#39;s/@version.*/@version        &#39;</span
 </div>
 
     <footer role="contentinfo">
-      <p>Copyright &copy; 2015-2022 Stanislav Popov -
+      <p>Copyright &copy; 2015-2026 Stanislav Popov -
         <span class="credit">Powered by <a target="_blank" href="https://gohugo.io">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/">Hugo-Octopress</a> theme.
       </p>
     </footer>

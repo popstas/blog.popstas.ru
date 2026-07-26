@@ -67,7 +67,7 @@
   <meta name="author" content="Stanislav Popov">
 
   
-  <meta name="generator" content="Hugo 0.66.0" />
+  <meta name="generator" content="Hugo 0.164.0">
 
   
   
@@ -154,7 +154,7 @@ UPD: вышел Vagrant 1.8, собирать Vagrant больше не надо
 <p>Компиляция обоих проектов хорошо описана на страницах <a href="https://github.com/hashicorp/otto">otto</a> и <a href="https://github.com/mitchellh/vagrant">vagrant</a>,
 мне хватило полчаса, чтобы поставить golang, настроить gopath и скомпилировать оба проекта без знания Go и Ruby.
 Главное не забыть добавить</p>
-<pre><code>export PATH=&quot;$GOPATH/bin:$PATH&quot;
+<pre tabindex="0"><code>export PATH=&#34;$GOPATH/bin:$PATH&#34;
 </code></pre><p>Перезапускаем терминал, проверяем, что у нас запускаются dev-версии: <code>vagrant version</code>, <code>otto version</code>.</p>
 <h3 id="настройка-nfs">Настройка NFS</h3>
 <p>Напрямую к otto не относится, но, узнав об <a href="http://mitchellh.com/comparing-filesystem-performance-in-virtual-machines">ужасной тормознутости</a>
@@ -163,7 +163,7 @@ UPD: вышел Vagrant 1.8, собирать Vagrant больше не надо
 чтобы Vagrant не спрашивал пароль при каждом запуске, подробнее <a href="https://docs.vagrantup.com/v2/synced-folders/nfs.html">в документации</a>.</p>
 <h2 id="подготовка-проекта">Подготовка проекта</h2>
 <p>Скачаем Drupal 8:</p>
-<pre><code>git clone https://github.com/drupal/drupal.git drupal8
+<pre tabindex="0"><code>git clone https://github.com/drupal/drupal.git drupal8
 cd drupal8
 </code></pre><h3 id="appfile">Appfile</h3>
 <p><a href="https://www.ottoproject.io/docs/concepts/appfile.html">Appfile</a> - основной файл конфигурации otto для проекта, должен быть в корне проекта.</p>
@@ -185,17 +185,17 @@ cd drupal8
 Разница между перезапуском и пересозданием машины (<code>otto dev halt &amp;&amp; time otto dev</code> и <code>otto dev destroy &amp;&amp; time otto dev</code>) составляет около 5 секунд.</p>
 <p>Судя по changelog, vagrant этот функционал не получит, по крайней мере в следующей версии, зато в Vagrant появится функционал для создания snapshots.</p>
 <p>Посмотреть слои можно командой <code>otto dev layers</code>:</p>
-<pre><code>$ otto dev layers
+<pre tabindex="0"><code>$ otto dev layers
 consul
 php5.6
 </code></pre><p>В результате, в случае PHP приложения, otto должен выдать дальнейшие инструкции:</p>
-<pre><code>$ otto dev
+<pre tabindex="0"><code>$ otto dev
 IP address: 100.66.143.21
 
 A development environment has been created for writing a PHP app.
 
 You can access the environment from this machine using the IP address above.
-For example, if you start your app with 'php -S 0.0.0.0:5000', then you can
+For example, if you start your app with &#39;php -S 0.0.0.0:5000&#39;, then you can
 access it using the above IP at port 5000.
 </code></pre><p>Что мы получили с автоматической настройкой?</p>
 <ul>
@@ -207,12 +207,12 @@ access it using the above IP at port 5000.
 <p>Для работы Drupal критически не хватает MySQL.</p>
 <h3 id="dependencies">Dependencies</h3>
 <p>Простейший способ добавить MySQL: указать зависимость. Создадим Appfile в корне проекта:</p>
-<pre><code>application {
-    name = &quot;drupal8&quot;
-    type = &quot;php&quot;
+<pre tabindex="0"><code>application {
+    name = &#34;drupal8&#34;
+    type = &#34;php&#34;
 
     dependency {
-        source = &quot;github.com/hashicorp/otto/examples/mysql&quot;
+        source = &#34;github.com/hashicorp/otto/examples/mysql&#34;
     }
 }
 </code></pre><p>Этот конфиг явно указывает тип приложения (php) и добавляет MySQL как зависимость.
@@ -230,7 +230,7 @@ access it using the above IP at port 5000.
 <p>Делаем <code>otto compile</code>, <code>otto dev destroy</code>, <code>otto dev</code> - получаем машину, готовую к запуску Drupal. Осталось запустить в ней сервер.</p>
 <h3 id="otto-dev-ssh">otto dev ssh</h3>
 <p>Заходим в виртуалку по SSH. Выполняем указанную выше команду запуска встроенного в PHP web-сервера, я не вижу ничего плохого в запуске под root на 80 порту на dev:</p>
-<pre><code>sudo php -S 0.0.0.0:80
+<pre tabindex="0"><code>sudo php -S 0.0.0.0:80
 </code></pre><p>После этого можно заходить открывать в браузере IP адрес, который выдал &lsquo;otto dev&rsquo;, можно его получить явно, выполнив &lsquo;otto dev address&rsquo;.</p>
 <h2 id="недостатки">Недостатки</h2>
 <h3 id="сырой-код">Сырой код</h3>
@@ -251,7 +251,7 @@ access it using the above IP at port 5000.
 <h3 id="dev-плохо-кастомизируется">Dev плохо кастомизируется</h3>
 <p>Otto в данный момент не дает возможность кастомизировать Vagrantfile dev-окружения через Appfile.
 Смотрим <code>.otto/compiled/app/dev/Vagrantfile</code>, оказывается, в нем прописаны параметры монтирования /vagrant, несовместимые с NFS. Исправляем строку на что-то вроде:</p>
-<pre><code>config.vm.synced_folder '/home/popstas/projects/site/drupal8', &quot;/vagrant&quot;, type: &quot;nfs&quot;
+<pre tabindex="0"><code>config.vm.synced_folder &#39;/home/popstas/projects/site/drupal8&#39;, &#34;/vagrant&#34;, type: &#34;nfs&#34;
 </code></pre><p>Следующий <code>otto compile</code> затрет эти изменения.</p>
 <p>Единственный способ сделать правильно: полностью переопределить Vagrantfile, используя application type = &ldquo;custom&rdquo;,
 но в таком случае вся магия автонастройки окружения пропадает.</p>
@@ -259,7 +259,7 @@ access it using the above IP at port 5000.
 <p>Я сделал для себя вывод, что Otto еще не готов для полноценного использования, на что в общем-то намекает версия продукта 0.1.
 Тем не менее продукт очень интересный и уже сейчас имеет преимущества по сравнению с Vagrant, а все недостатки объясняются новизной Otto,
 разработчики о них знают и имеют планы по устранению.</p>
-<p>Сейчас непонятно, как создавать свои слои, когда слои появятся в Otto полноценно, для меня это будет достаточной причиной, чтобы перейти на него с Vagrant'а.</p>
+<p>Сейчас непонятно, как создавать свои слои, когда слои появятся в Otto полноценно, для меня это будет достаточной причиной, чтобы перейти на него с Vagrant&rsquo;а.</p>
         </div>
         
 
@@ -318,7 +318,6 @@ access it using the above IP at port 5000.
         <div>Старее: <a class="related" href="https://blog.popstas.ru/blog/2015/12/10/interactive-bash-history-with-search/" title="Интерактивная Zsh history с поиском и скроллом, percol">Интерактивная Zsh history с поиском и скроллом, percol</a></div>
     
   </p>
-  
 </footer>
 
       </article>
@@ -389,6 +388,12 @@ access it using the above IP at port 5000.
           
             
               <li class="post">
+                <a href="/blog/2022/02/22/github-projects-2021/">Мои проекты 2021: умный дом, журнал медитаций, календарь активностей</a>
+              </li>
+            
+          
+            
+              <li class="post">
                 <a href="/blog/2022/01/29/content-2021/">Мой контент 2021: книги, музыка, фильмы, подкасты, каналы</a>
               </li>
             
@@ -429,12 +434,6 @@ access it using the above IP at port 5000.
               </li>
             
           
-            
-              <li class="post">
-                <a href="/blog/2020/05/20/den-arieli-predskazuemaya-irracionalnost/">Содержание книги Дэна Ариели «Предсказуемая иррациональность»</a>
-              </li>
-            
-          
         </ul>
       </section>
     
@@ -445,7 +444,7 @@ access it using the above IP at port 5000.
 </div>
 
     <footer role="contentinfo">
-      <p>Copyright &copy; 2015-2022 Stanislav Popov -
+      <p>Copyright &copy; 2015-2026 Stanislav Popov -
         <span class="credit">Powered by <a target="_blank" href="https://gohugo.io">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/">Hugo-Octopress</a> theme.
       </p>
     </footer>

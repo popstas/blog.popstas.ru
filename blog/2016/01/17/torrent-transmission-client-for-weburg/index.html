@@ -93,7 +93,7 @@ transmission-cli - консольная утилита, решающая час�
   <meta name="author" content="Stanislav Popov">
 
   
-  <meta name="generator" content="Hugo 0.66.0" />
+  <meta name="generator" content="Hugo 0.164.0">
 
   
   
@@ -193,16 +193,16 @@ transmission-cli - консольная утилита, решающая час�
 </ul>
 <h2 id="установка">Установка</h2>
 <p>Установить клиент можно так:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">latest_phar<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>curl -s https://api.github.com/repos/popstas/transmission-cli/releases/latest | grep <span style="color:#e6db74">&#39;browser_&#39;</span> | cut -d<span style="color:#ae81ff">\&#34;</span> -f4<span style="color:#66d9ef">)</span>
-wget -O /usr/local/bin/transmission-cli <span style="color:#e6db74">&#34;</span>$latest_phar<span style="color:#e6db74">&#34;</span>
-chmod +x /usr/local/bin/transmission-cli
-</code></pre></div><p>Пользоваться графиками можно с трудом, потому что InfluxDB и Grafana вам придется устанавливать самостоятельно.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>latest_phar<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>curl -s https://api.github.com/repos/popstas/transmission-cli/releases/latest | grep <span style="color:#e6db74">&#39;browser_&#39;</span> | cut -d<span style="color:#ae81ff">\&#34;</span> -f4<span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>wget -O /usr/local/bin/transmission-cli <span style="color:#e6db74">&#34;</span>$latest_phar<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>chmod +x /usr/local/bin/transmission-cli
+</span></span></code></pre></div><p>Пользоваться графиками можно с трудом, потому что InfluxDB и Grafana вам придется устанавливать самостоятельно.
 Я ставил то и другое в docker на свою виртуалку и пробрасывал порты на localhost,
 сейчас localhost вшит в <a href="https://github.com/popstas/transmission-cli/blob/master/src/Config.php">конфиг</a>,
 который по сути сейчас находится в коде.</p>
 <p>Поставить можно так, заменив папки <code>/Users/popstas/lib/grafana</code> и <code>/var/lib/influxdb</code> на ваши,
 это укажет, где будут храниться данные InfluxDB и Grafana:</p>
-<pre><code>docker run -d \ -p 3000:3000 \
+<pre tabindex="0"><code>docker run -d \ -p 3000:3000 \
            -v /Users/popstas/lib/grafana:/var/lib/grafana \
             --name grafana grafana/grafana
 
@@ -217,7 +217,7 @@ VirtualBox из Mac OS (какой-то старый глюк docker).</p>
 <p>Раздачи у меня скачиваются в папку, за которой следят оба Transmission, как только туда попадает торрент, раздача
 сразу начинается (можно сделать, чтобы спрашивала разрешение, настраивается в Transmission).</p>
 <p>В итоге у меня получился такой cron:</p>
-<pre><code>PATH=&quot;$PATH:/usr/local/bin&quot;
+<pre tabindex="0"><code>PATH=&#34;$PATH:/usr/local/bin&#34;
 59 * * * * transmission-cli remove-duplicates --host=localhost
 59 * * * * transmission-cli remove-duplicates --host=wrtnsq
 0  * * * * transmission-cli send-metrics --host=localhost
@@ -297,7 +297,7 @@ Cacti или Graphite и не видел Grafana, посмотрите, крас
 <h3 id="phpcs-phpmd">PHPCS, PHPMD</h3>
 <p>PHP Code Sniffer умеет анализировать ваш код на соответствие определенным стандартам, в моем случае PSR-2,
 ставится через Composer, используется так:</p>
-<pre><code>./vendor/bin/phpcs --standard=psr2 ./src
+<pre tabindex="0"><code>./vendor/bin/phpcs --standard=psr2 ./src
 </code></pre><p>А PHP Mess Detector у меня не запустился.</p>
 <h3 id="travis-ci">Travis CI</h3>
 <p>Впервые удалось использовать его по назначению. Как-то пробовал использовать его для тестов пакета bash скриптов
@@ -312,10 +312,10 @@ Cacti или Graphite и не видел Grafana, посмотрите, крас
 <p>До покрытия тестами я еще не добирался, я тесты-то еще только начинаю использовать, решил попробовать на этом проекте.</p>
 <p>Чтобы добавить coveralls в самом простом случае (в доках есть и сложные), достаточно сделать так, чтобы PHPUnit
 генерил файл <code>build/logs/clover.xml</code>, для этого надо добавить строчку в phpunit.xml, в секцию logging:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;logging&gt;</span>
-    <span style="color:#f92672">&lt;log</span> <span style="color:#a6e22e">type=</span><span style="color:#e6db74">&#34;coverage-clover&#34;</span> <span style="color:#a6e22e">target=</span><span style="color:#e6db74">&#34;build/logs/clover.xml&#34;</span><span style="color:#f92672">/&gt;</span>
-<span style="color:#f92672">&lt;/logging&gt;</span>
-</code></pre></div><p>Ну и конечно зарегаться на <a href="https://coveralls.io/">https://coveralls.io/</a> и активировать там проект.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;logging&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;log</span> <span style="color:#a6e22e">type=</span><span style="color:#e6db74">&#34;coverage-clover&#34;</span> <span style="color:#a6e22e">target=</span><span style="color:#e6db74">&#34;build/logs/clover.xml&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/logging&gt;</span>
+</span></span></code></pre></div><p>Ну и конечно зарегаться на <a href="https://coveralls.io/">https://coveralls.io/</a> и активировать там проект.
 Если путь будет другой, придется читать доки и создавать файл настройки .coveralls.yml</p>
 <p>В результате я имею красивую красную ачивку на странице проекта
 и <a href="https://coveralls.io/github/popstas/transmission-cli">историю деградации покрытия</a> :)</p>
@@ -377,7 +377,6 @@ Cacti или Graphite и не видел Grafana, посмотрите, крас
         <div>Старее: <a class="related" href="https://blog.popstas.ru/blog/2016/01/17/automacic-update-phpstorm-eap-on-mac-os/" title="Быстрое обновление PhpStorm EAP на Mac OS через bash">Быстрое обновление PhpStorm EAP на Mac OS через bash</a></div>
     
   </p>
-  
 </footer>
 
       </article>
@@ -448,6 +447,12 @@ Cacti или Graphite и не видел Grafana, посмотрите, крас
           
             
               <li class="post">
+                <a href="/blog/2022/02/22/github-projects-2021/">Мои проекты 2021: умный дом, журнал медитаций, календарь активностей</a>
+              </li>
+            
+          
+            
+              <li class="post">
                 <a href="/blog/2022/01/29/content-2021/">Мой контент 2021: книги, музыка, фильмы, подкасты, каналы</a>
               </li>
             
@@ -488,12 +493,6 @@ Cacti или Graphite и не видел Grafana, посмотрите, крас
               </li>
             
           
-            
-              <li class="post">
-                <a href="/blog/2020/05/20/den-arieli-predskazuemaya-irracionalnost/">Содержание книги Дэна Ариели «Предсказуемая иррациональность»</a>
-              </li>
-            
-          
         </ul>
       </section>
     
@@ -504,7 +503,7 @@ Cacti или Graphite и не видел Grafana, посмотрите, крас
 </div>
 
     <footer role="contentinfo">
-      <p>Copyright &copy; 2015-2022 Stanislav Popov -
+      <p>Copyright &copy; 2015-2026 Stanislav Popov -
         <span class="credit">Powered by <a target="_blank" href="https://gohugo.io">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/">Hugo-Octopress</a> theme.
       </p>
     </footer>

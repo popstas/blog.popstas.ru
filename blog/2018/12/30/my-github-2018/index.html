@@ -103,7 +103,7 @@ PR я сделал проектов в 10, один из PR был в прест
   <meta name="author" content="Stanislav Popov">
 
   
-  <meta name="generator" content="Hugo 0.66.0" />
+  <meta name="generator" content="Hugo 0.164.0">
 
   
   
@@ -212,7 +212,7 @@ PR я сделал проектов в 10, один из PR был в прест
 <p>Но я хотел делать всё локально, а стандартная тестилка навыка предполагает, что навык открыт для всех. Поэтому перед написанием навыка я сделал свою тестилку <a href="https://github.com/popstas/yandex-dialogs-client">yandex-dialogs-client</a>. Потом я захотел автотесты (сценарии диалогов с проверкой ответов навыка), сделал их, позже они породили <a href="https://github.com/popstas/yandex-dialogs-tester">yandex-dialogs-tester</a>, который умеет прогонять те же тесты в терминале.</p>
 <p>Этот проект привел меня к автору <a href="https://github.com/fletcherist/yandex-dialogs-sdk">yandex-dialogs-sdk</a>, мы с ним какое-то время плодотворно сотрудничали: он писал sdk, учитывая мои хотелки, а я имел боевой навык, покрытый автотестами. Весь июль занимался навыком, самый жаркий месяц был на github, 315 коммитов за месяц, из дома не вылазил )
 Под конец простых регулярок перестало хватать для понимания запроса юзера, я начал прикручивать к навыку Томита-парсер для какого-то понимания смысла услышанного (никакого машинного обучения), но всё остановилось на прототипе <a href="https://github.com/popstas/tomita-parser-test">tomita-parser-test</a>, т.к. навыком я сам пользовался редко, поднадоело.</p>
-<p>Попробовать можно так: скажите Алисе &ldquo;Запусти навык <a href="https://dialogs.yandex.ru/store/skills/00203e6e-vtoraya-pamya">Вторая память</a>&quot;.</p>
+<p>Попробовать можно так: скажите Алисе &ldquo;Запусти навык <a href="https://dialogs.yandex.ru/store/skills/00203e6e-vtoraya-pamya">Вторая память</a>&rdquo;.</p>
 <h2 id="viasite-projects">Viasite projects</h2>
 <p>Новый проект сначала потребовал делать автоматические скриншоты всех наших сайтов (для портфолио), так появился viasite-projects (код закрыт) с единственной командой screenshot, потом захотелось сделать со списком сайтов что-то этакое, недельку пописал граф сайтов на d3 (исходники закрыты). В течение года я написал штук 5 разных проектов, которые используют данные sites.json, например, <a href="https://github.com/viasite-ansible/hain-plugin-ansible-server-site">hain-plugin-ansible-server-site</a>, который позволяет попадать в терминал любого сайта за 5 секунд, зная только домен (и еще через 5 секунд в админку Drupal, без знания пароля). Эта фича экономит мне по несколько минут каждый день.</p>
 <p>Так sites.json породили новую группу проектов viasite-projects, там уже были генератор &ldquo;бедного&rdquo; sites.json из yml файлов ansible, который никуда не ходит дальше одной папки, а также сборщик метрик <a href="https://github.com/viasite/site-discovery">site-discovery</a>, который уже умел собирать данные всех сайтов в один json, но только в рамках одного сервера. Я написал viasite-projects info, который отвечает за плавный сбор данных со всех сайтов, чтобы сервера от этого не страдали, собирает один &ldquo;богатый&rdquo; sites.json со всеми собранными данными. Потом написал viasite-projects check, который проверяет все боевые сайты на код 200. Потом viasite-projects-list, который выводит крутую таблицу на данных sites.json. Код всего этого закрыт не из жадности, а потому что специфики много, вряд ли в таком виде это кто-то захочет повторить.</p>
@@ -274,7 +274,6 @@ PR я сделал проектов в 10, один из PR был в прест
         <div>Старее: <a class="related" href="https://blog.popstas.ru/blog/2018/12/28/irbis-a-yandex-alice-review/" title="Обзор умной колонки IRBIS A c Алисой от Яндекса">Обзор умной колонки IRBIS A c Алисой от Яндекса</a></div>
     
   </p>
-  
 </footer>
 
       </article>
@@ -345,6 +344,12 @@ PR я сделал проектов в 10, один из PR был в прест
           
             
               <li class="post">
+                <a href="/blog/2022/02/22/github-projects-2021/">Мои проекты 2021: умный дом, журнал медитаций, календарь активностей</a>
+              </li>
+            
+          
+            
+              <li class="post">
                 <a href="/blog/2022/01/29/content-2021/">Мой контент 2021: книги, музыка, фильмы, подкасты, каналы</a>
               </li>
             
@@ -385,12 +390,6 @@ PR я сделал проектов в 10, один из PR был в прест
               </li>
             
           
-            
-              <li class="post">
-                <a href="/blog/2020/05/20/den-arieli-predskazuemaya-irracionalnost/">Содержание книги Дэна Ариели «Предсказуемая иррациональность»</a>
-              </li>
-            
-          
         </ul>
       </section>
     
@@ -401,7 +400,7 @@ PR я сделал проектов в 10, один из PR был в прест
 </div>
 
     <footer role="contentinfo">
-      <p>Copyright &copy; 2015-2022 Stanislav Popov -
+      <p>Copyright &copy; 2015-2026 Stanislav Popov -
         <span class="credit">Powered by <a target="_blank" href="https://gohugo.io">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/">Hugo-Octopress</a> theme.
       </p>
     </footer>

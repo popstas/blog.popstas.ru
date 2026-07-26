@@ -101,7 +101,7 @@
   <meta name="author" content="Stanislav Popov">
 
   
-  <meta name="generator" content="Hugo 0.66.0" />
+  <meta name="generator" content="Hugo 0.164.0">
 
   
   
@@ -276,7 +276,7 @@
 <img loading="lazy" src="/images/2017-03/ansible-role-zsh-colors.gif" title="" alt="" />
 <h2 id="установка">Установка</h2>
 <p>Итак, если вам понравилось, предлагаю сначала посмотреть работу вживую, в Vagrant:</p>
-<pre><code>git clone https://github.com/viasite-ansible/ansible-role-zsh.git
+<pre tabindex="0"><code>git clone https://github.com/viasite-ansible/ansible-role-zsh.git
 vagrant up
 </code></pre><p>Перед установкой на рабочую систему внимательно прочитайте это:</p>
 <ul>
@@ -286,15 +286,15 @@ vagrant up
 либо в <code>~/.zshrc.local</code>, этот файл инклюдится в конце <code>~/.zshrc</code> и ansible его не трогает.</li>
 </ul>
 <p>Если все устраивает, можно установить роль через <code>ansible-galaxy</code>:</p>
-<pre><code>ansible-galaxy install viasite-ansible.zsh
+<pre tabindex="0"><code>ansible-galaxy install viasite-ansible.zsh
 </code></pre><p>Потом создать плейбук вроде такого:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">hosts</span>: all
-<span style="color:#66d9ef">vars</span>:
-  <span style="color:#66d9ef">zsh_autosuggestions_bind_key</span>: <span style="color:#e6db74">&#34;^U&#34;</span>
-<span style="color:#66d9ef">roles</span>:
-  - viasite-ansible.zsh
-</code></pre></div><p>Сохранить, например, в <code>zsh.yml</code>. После этого роль можно применить к локальному юзеру:</p>
-<pre><code>ansible-playbook -i &quot;localhost,&quot; -c local zsh.yml
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">hosts</span>: <span style="color:#ae81ff">all</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">vars</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">zsh_autosuggestions_bind_key</span>: <span style="color:#e6db74">&#34;^U&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">roles</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">viasite-ansible.zsh</span>
+</span></span></code></pre></div><p>Сохранить, например, в <code>zsh.yml</code>. После этого роль можно применить к локальному юзеру:</p>
+<pre tabindex="0"><code>ansible-playbook -i &#34;localhost,&#34; -c local zsh.yml
 </code></pre><p>Как применить к другим юзерам и серверам пользователи ansible думаю разберутся.</p>
 <p>Проверено на Debian 6, Ubuntu 14.04, Ubuntu 16.04, macOS 10.12, CentOS 7.</p>
 <p>Все доступные переменные не стал выносить в README.md, их можно посмотреть
@@ -366,7 +366,6 @@ vagrant up
         <div>Старее: <a class="related" href="https://blog.popstas.ru/blog/2017/03/08/develop-ansible-roles-with-molecule-and-gitlab-ci/" title="Мой процесс написания ansible роли с Molecule и Gitlab CI">Мой процесс написания ansible роли с Molecule и Gitlab CI</a></div>
     
   </p>
-  
 </footer>
 
       </article>
@@ -437,6 +436,12 @@ vagrant up
           
             
               <li class="post">
+                <a href="/blog/2022/02/22/github-projects-2021/">Мои проекты 2021: умный дом, журнал медитаций, календарь активностей</a>
+              </li>
+            
+          
+            
+              <li class="post">
                 <a href="/blog/2022/01/29/content-2021/">Мой контент 2021: книги, музыка, фильмы, подкасты, каналы</a>
               </li>
             
@@ -477,12 +482,6 @@ vagrant up
               </li>
             
           
-            
-              <li class="post">
-                <a href="/blog/2020/05/20/den-arieli-predskazuemaya-irracionalnost/">Содержание книги Дэна Ариели «Предсказуемая иррациональность»</a>
-              </li>
-            
-          
         </ul>
       </section>
     
@@ -493,7 +492,7 @@ vagrant up
 </div>
 
     <footer role="contentinfo">
-      <p>Copyright &copy; 2015-2022 Stanislav Popov -
+      <p>Copyright &copy; 2015-2026 Stanislav Popov -
         <span class="credit">Powered by <a target="_blank" href="https://gohugo.io">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/">Hugo-Octopress</a> theme.
       </p>
     </footer>

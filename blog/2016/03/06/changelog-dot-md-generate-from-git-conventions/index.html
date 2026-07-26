@@ -83,7 +83,7 @@ UPD 15.04.2020: как я использую conventional changelog в связ�
   <meta name="author" content="Stanislav Popov">
 
   
-  <meta name="generator" content="Hugo 0.66.0" />
+  <meta name="generator" content="Hugo 0.164.0">
 
   
   
@@ -188,7 +188,7 @@ UPD 15.04.2020: как я использую conventional changelog в связ�
 <li>Исправленные баги</li>
 </ul>
 <p>Вести такой документ достаточно просто, я за 120 коммитов почти не забывал это делать. В файле нужно всегда держать вверху секцию Next Release с подготовленными заголовками, как-то так:</p>
-<pre><code>## Next Release
+<pre tabindex="0"><code>## Next Release
 
 BREAKING CHANGES:
 
@@ -222,7 +222,7 @@ BUG FIXES:
 <h3 id="git-extras-changelog">git-extras changelog</h3>
 <p><a href="https://github.com/tj/git-extras">tj/git-extras</a> - это <a href="https://github.com/tj/git-extras/blob/master/Commands.md">огромный</a> (около 50) пакет дополнительных команд, упрощающих работу с git. Я его раньше уже видел, но в то время подумал, что мне и встроенных в git команд слишком много. Но в поисках генератора снова набрел на него, у него есть такая команда.</p>
 <p>Вот таким нехитрым способом можно в одну команду сгенерировать и запушить лог для проекта, где его не было, но версии помечались тегами и комменты к коммитам были осмысленными:</p>
-<pre><code>git changelog -a -p -x &gt; CHANGELOG.md &amp;&amp; git add CHANGELOG.md &amp;&amp; git commit CHANGELOG.md -m &quot;add CHANGELOG.md&quot; &amp;&amp; git push origin master
+<pre tabindex="0"><code>git changelog -a -p -x &gt; CHANGELOG.md &amp;&amp; git add CHANGELOG.md &amp;&amp; git commit CHANGELOG.md -m &#34;add CHANGELOG.md&#34; &amp;&amp; git push origin master
 </code></pre><p>Для пробы сделал лог для <a href="https://github.com/popstas/site-setup/blob/5cb4f52bfc5909bac8b8bc77540cf3283b94ff2a/CHANGELOG.md">site-setup</a>, <a href="https://github.com/popstas/server-scripts/blob/009d82420fa4623417cf437b00df36c662c759a2/CHANGELOG.md">server-scripts</a>, <a href="https://github.com/popstas/drupal-scripts/blob/b0b7a5907798ebde714471fbf1611c3232df5925/CHANGELOG.md">drupal-scripts</a>, на этом успокоился, больше в общем и тестить не на чем.</p>
 <p>Ниже я отказался от него в пользу <code>conventional changelog</code>.</p>
 <h4 id="плюсы">Плюсы:</h4>
@@ -240,7 +240,7 @@ BUG FIXES:
 <h3 id="conventional-changelog">conventional-changelog</h3>
 <p><a href="https://github.com/stevemao/conventional-changelog-cli">stevemao/conventional-changelog-cli</a> - node.js скрипт, также нацелен на стандарты Angular, но, <a href="https://github.com/stevemao/conventional-changelog-cli#why">по заявлениям</a> авторов это как раз то, что нужно:</p>
 <ul>
-<li>поддерживает свои форматы коммитов и несколько общих: &lsquo;angular&rsquo;, &lsquo;atom&rsquo;, &lsquo;codemirror&rsquo;, &lsquo;ember&rsquo;, &lsquo;eslint&rsquo;, &lsquo;express&rsquo;, &lsquo;jquery&rsquo;, &lsquo;jscs&rsquo;, &lsquo;jshint&rsquo;</li>
+<li>поддерживает свои форматы коммитов и несколько общих: &lsquo;angular&rsquo;, &lsquo;atom&rsquo;, &lsquo;codemirror&rsquo;, &rsquo;ember&rsquo;, &rsquo;eslint&rsquo;, &rsquo;express&rsquo;, &lsquo;jquery&rsquo;, &lsquo;jscs&rsquo;, &lsquo;jshint&rsquo;</li>
 <li>поддерживает шаблоны</li>
 <li>протестирован, в отличие от github_changelog_generator</li>
 <li>отвязан от Github</li>
@@ -250,14 +250,14 @@ BUG FIXES:
 <p>Сгенерированный лог дал понять, что в eslint принято указывать категорию и через двоеточие суть, так коммиты в релизе разбиваются по категориям. Но в целом, конечно, коммиты были названы неправильно и хорошего лога не получилось.</p>
 <p>Зато запуск без указания пресета сообщений выдал почти то же, что и <code>git-extras</code>, но вдобавок к этому задал мажорным и минорным версиям разный уровень и указал ссылку на коммит на Github для каждого коммита.</p>
 <p>Сгенерировать лог с нуля можно командой:</p>
-<pre><code>conventional-changelog -i CHANGELOG.md -s -r 0
+<pre tabindex="0"><code>conventional-changelog -i CHANGELOG.md -s -r 0
 </code></pre><p>После этого я конечно побежал исправлять логи у проектов, которым сделал логи час назад, вот что вышло: <a href="https://github.com/popstas/site-setup/blob/fd159ed7848aaf8695642bcb53c795922d307dd6/CHANGELOG.md">site-setup</a>, <a href="https://github.com/popstas/server-scripts/blob/ef6138faf0179f31929ff0d90d98466749d4f85b/CHANGELOG.md">server-scripts</a>, <a href="https://github.com/popstas/drupal-scripts/blob/3eb923c09e319a163f9fea9669dfa735b60044c1/CHANGELOG.md">drupal-scripts</a>.</p>
 <p>Для проектов на своем Gitlab все сложнее: чтобы правильно делались ссылки на коммиты, нужно, во-первых, указать адрес проекта через файл package.json:</p>
-<pre><code>{
-  &quot;name&quot;: &quot;myproject&quot;,
-  &quot;repository&quot;: {
-    &quot;type&quot;: &quot;git&quot;,
-    &quot;url&quot;: &quot;http://my.gitlab.ru/projects/myproject.git&quot;
+<pre tabindex="0"><code>{
+  &#34;name&#34;: &#34;myproject&#34;,
+  &#34;repository&#34;: {
+    &#34;type&#34;: &#34;git&#34;,
+    &#34;url&#34;: &#34;http://my.gitlab.ru/projects/myproject.git&#34;
   }
 }
 </code></pre><p>А во-вторых не знаю, что надо сделать, он генерит ссылки с сокращенными хэшами, которые Github понимает, а Gitlab открывает страницу списка коммитов, т.к. ему нужен полный хэш, шаблон сходу не нашел.</p>
@@ -274,19 +274,19 @@ BUG FIXES:
 <p>Генерация CHANGELOG.md - шаг в сторону хорошей и актуальной документации по проекту, которая не будет занимать часы или дни, она будет частью рабочего процесса, конечно для маленького проекта из одного программиста это избыточно, мягко говоря, но надо же с чего-то начинать.</p>
 <h4 id="upd-08032016">UPD 08.03.2016</h4>
 <p>Добавил валидатор:</p>
-<pre><code>npm install -g conventional-changelog-lint
-echo 'conventional-changelog-lint -e' &gt; .git/hooks/commit-msg
+<pre tabindex="0"><code>npm install -g conventional-changelog-lint
+echo &#39;conventional-changelog-lint -e&#39; &gt; .git/hooks/commit-msg
 chmod +x .git/hooks/commit-msg
 </code></pre><p>После этого коммиты с неправильными сообщениями перестанут проходить.</p>
 <p>Перед релизом генерирую CHANGELOG.md:</p>
-<pre><code>conventional-changelog -p angular -i CHANGELOG.md -s
+<pre tabindex="0"><code>conventional-changelog -p angular -i CHANGELOG.md -s
 </code></pre><p>Это допишет в лог содержимое коммитов с последнего релиза (semver тега). После этого остается поправить руками то, что не нравится, проставить версию.</p>
 <p>После этого я генерирую документацию специфичной для проекта командой, коммит, тег, пуш:</p>
-<pre><code>git add .
-git commit -m 'docs: v0.6.0'
+<pre tabindex="0"><code>git add .
+git commit -m &#39;docs: v0.6.0&#39;
 git push --follow-tags
 </code></pre><p>После этого релиз. Релиз будем делать через <code>conventional-github-releaser</code>:</p>
-<pre><code>npm install -g conventional-github-releaser
+<pre tabindex="0"><code>npm install -g conventional-github-releaser
 CONVENTIONAL_GITHUB_RELEASER_TOKEN=your_public_repo_token conventional-github-releaser -p angular
 </code></pre><p>Еще не разобрался с тем, как это скрестить с выкладкой PHAR архива с Travis: для <code>github-releaser</code> нужно, чтобы релиза еще не было, но он создается автоматически при пуше тега на Github. После удаления релиза (превращения в Draft), github-releaser отработал, вставил данные CHANGELOG в релиз, все как надо.</p>
         </div>
@@ -347,7 +347,6 @@ CONVENTIONAL_GITHUB_RELEASER_TOKEN=your_public_repo_token conventional-github-re
         <div>Старее: <a class="related" href="https://blog.popstas.ru/blog/2016/03/02/git-gitlab-planfix-integration/" title="Интеграция Git, Gitlab и Planfix почти как на Github">Интеграция Git, Gitlab и Planfix почти как на Github</a></div>
     
   </p>
-  
 </footer>
 
       </article>
@@ -418,6 +417,12 @@ CONVENTIONAL_GITHUB_RELEASER_TOKEN=your_public_repo_token conventional-github-re
           
             
               <li class="post">
+                <a href="/blog/2022/02/22/github-projects-2021/">Мои проекты 2021: умный дом, журнал медитаций, календарь активностей</a>
+              </li>
+            
+          
+            
+              <li class="post">
                 <a href="/blog/2022/01/29/content-2021/">Мой контент 2021: книги, музыка, фильмы, подкасты, каналы</a>
               </li>
             
@@ -458,12 +463,6 @@ CONVENTIONAL_GITHUB_RELEASER_TOKEN=your_public_repo_token conventional-github-re
               </li>
             
           
-            
-              <li class="post">
-                <a href="/blog/2020/05/20/den-arieli-predskazuemaya-irracionalnost/">Содержание книги Дэна Ариели «Предсказуемая иррациональность»</a>
-              </li>
-            
-          
         </ul>
       </section>
     
@@ -474,7 +473,7 @@ CONVENTIONAL_GITHUB_RELEASER_TOKEN=your_public_repo_token conventional-github-re
 </div>
 
     <footer role="contentinfo">
-      <p>Copyright &copy; 2015-2022 Stanislav Popov -
+      <p>Copyright &copy; 2015-2026 Stanislav Popov -
         <span class="credit">Powered by <a target="_blank" href="https://gohugo.io">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/">Hugo-Octopress</a> theme.
       </p>
     </footer>

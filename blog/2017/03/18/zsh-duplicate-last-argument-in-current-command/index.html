@@ -91,7 +91,7 @@ cp filename.ext &lt;Alt&#43;,&gt;
   <meta name="author" content="Stanislav Popov">
 
   
-  <meta name="generator" content="Hugo 0.66.0" />
+  <meta name="generator" content="Hugo 0.164.0">
 
   
   
@@ -168,7 +168,7 @@ cp filename.ext &lt;Alt&#43;,&gt;
 поучаствовав в правке пары плагинов, я начал понимать, как работает вся эта магия, которой я давно пользуюсь.</p>
 <p>Так вот, у меня в терминале бывает частая задача: скопировать файл и положить рядом с немного другим именем.
 Раньше я пользовался такой схемой:</p>
-<pre><code>ls filename.ext
+<pre tabindex="0"><code>ls filename.ext
 cp &lt;Alt+.&gt; &lt;Alt+.&gt;
 </code></pre><p>То есть, я сначала вводил команду-пустышку, такую, чтобы в историю попала команда, где последним аргументом будет путь к файлу.
 Потом через <code>Alt+.</code> вставлял 2 раза последний аргумент предыдущей команды.</p>
@@ -179,7 +179,7 @@ cp &lt;Alt+.&gt; &lt;Alt+.&gt;
 <li><code>mc /home/user /home/user</code></li>
 </ul>
 <p>Теперь я могу делать так:</p>
-<pre><code>cp filename.ext &lt;Alt+,&gt;
+<pre tabindex="0"><code>cp filename.ext &lt;Alt+,&gt;
 </code></pre><p>В действии:</p>
 <p><img src="/images/2017-03/zsh-duplicate-last-arg.gif" alt="zsh duplicate last argument"></p>
 <p>Когда я правил чужие виджеты (виджетом в zsh называется функция, повешенная на хоткей), я понял,
@@ -188,12 +188,12 @@ cp &lt;Alt+.&gt; &lt;Alt+.&gt;
 попадаем <a href="http://zsh.sourceforge.net/Doc/Release/Zsh-Line-Editor.html">на доку</a>. Через 10 минут чтения и правок родилась эта функция.</p>
 <p>После того, как я написал свой виджет, оказалось, что такая команда уже встроена в zsh, и даже лучше.
 Оставлю свой скрипт в конце статьи для того, чтобы было понятно, как можно писать свои виджеты, но пользоваться лучше этим:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Example &lt;Ctrl+.&gt;&lt;Ctrl+,&gt; inserts 2nd argument from end of prev. cmd</span>
-<span style="color:#75715e"># http://chneukirchen.org/blog/archive/2013/03/10-fresh-zsh-tricks-you-may-not-know.html</span>
-autoload -Uz copy-earlier-word
-zle -N copy-earlier-word
-bindkey <span style="color:#e6db74">&#34;^[,&#34;</span> copy-earlier-word
-</code></pre></div><p>Код надо вставить в <code>.zshrc</code> или <code>.zshrc.local</code> если вы пользуетесь
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Example &lt;Ctrl+.&gt;&lt;Ctrl+,&gt; inserts 2nd argument from end of prev. cmd</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># http://chneukirchen.org/blog/archive/2013/03/10-fresh-zsh-tricks-you-may-not-know.html</span>
+</span></span><span style="display:flex;"><span>autoload -Uz copy-earlier-word
+</span></span><span style="display:flex;"><span>zle -N copy-earlier-word
+</span></span><span style="display:flex;"><span>bindkey <span style="color:#e6db74">&#34;^[,&#34;</span> copy-earlier-word
+</span></span></code></pre></div><p>Код надо вставить в <code>.zshrc</code> или <code>.zshrc.local</code> если вы пользуетесь
 <a href="/blog/2017/03/09/ansible-role-zsh-powerlevel9k-fzf-syntax-autosuggestions/">ansible-role-zsh</a></p>
 <p>Виджет вставляет последний аргумент текущей команды, но если нажать еще дважды - вставит предпоследний.
 Например, вы ввели команду <code>some-command arg1 arg2</code>, чтобы вставить предпоследний аргумент, нажмите <code>&lt;Alt+.&gt;&lt;Alt+,&gt;&lt;Alt+,&gt;</code>.</p>
@@ -207,15 +207,15 @@ bindkey <span style="color:#e6db74">&#34;^[,&#34;</span> copy-earlier-word
 </ul>
 <p>Оставалось сделать команде rtrim, отрезать последнее слово, добавить к буферу и передвинуть курсор на новое место.</p>
 <p>Сам скрипт:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Ctrl+, - duplicate last word in current command</span>
-zsh-duplicate-last-arg<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-	BUFFER<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>echo <span style="color:#e6db74">&#34;</span>$BUFFER<span style="color:#e6db74">&#34;</span> | sed -e <span style="color:#e6db74">&#39;s/[[:space:]]*$//&#39;</span><span style="color:#66d9ef">)</span>
-	BUFFER<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$BUFFER<span style="color:#e6db74"> </span><span style="color:#e6db74">${</span>BUFFER##* <span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
-	CURSOR<span style="color:#f92672">=</span>$#BUFFER
-<span style="color:#f92672">}</span>
-zle -N zsh-duplicate-last-arg
-bindkey <span style="color:#e6db74">&#39;^[,&#39;</span> zsh-duplicate-last-arg
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Ctrl+, - duplicate last word in current command</span>
+</span></span><span style="display:flex;"><span>zsh-duplicate-last-arg<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>	BUFFER<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>echo <span style="color:#e6db74">&#34;</span>$BUFFER<span style="color:#e6db74">&#34;</span> | sed -e <span style="color:#e6db74">&#39;s/[[:space:]]*$//&#39;</span><span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>	BUFFER<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$BUFFER<span style="color:#e6db74"> </span><span style="color:#e6db74">${</span>BUFFER##* <span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>	CURSOR<span style="color:#f92672">=</span>$#BUFFER
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>zle -N zsh-duplicate-last-arg
+</span></span><span style="display:flex;"><span>bindkey <span style="color:#e6db74">&#39;^[,&#39;</span> zsh-duplicate-last-arg
+</span></span></code></pre></div>
         </div>
         
 
@@ -274,7 +274,6 @@ bindkey <span style="color:#e6db74">&#39;^[,&#39;</span> zsh-duplicate-last-arg
         <div>Старее: <a class="related" href="https://blog.popstas.ru/blog/2017/03/13/python-highlight-syntax-in-phpstorm/" title="Подсветка Python синтаксиса в PhpStorm">Подсветка Python синтаксиса в PhpStorm</a></div>
     
   </p>
-  
 </footer>
 
       </article>
@@ -345,6 +344,12 @@ bindkey <span style="color:#e6db74">&#39;^[,&#39;</span> zsh-duplicate-last-arg
           
             
               <li class="post">
+                <a href="/blog/2022/02/22/github-projects-2021/">Мои проекты 2021: умный дом, журнал медитаций, календарь активностей</a>
+              </li>
+            
+          
+            
+              <li class="post">
                 <a href="/blog/2022/01/29/content-2021/">Мой контент 2021: книги, музыка, фильмы, подкасты, каналы</a>
               </li>
             
@@ -385,12 +390,6 @@ bindkey <span style="color:#e6db74">&#39;^[,&#39;</span> zsh-duplicate-last-arg
               </li>
             
           
-            
-              <li class="post">
-                <a href="/blog/2020/05/20/den-arieli-predskazuemaya-irracionalnost/">Содержание книги Дэна Ариели «Предсказуемая иррациональность»</a>
-              </li>
-            
-          
         </ul>
       </section>
     
@@ -401,7 +400,7 @@ bindkey <span style="color:#e6db74">&#39;^[,&#39;</span> zsh-duplicate-last-arg
 </div>
 
     <footer role="contentinfo">
-      <p>Copyright &copy; 2015-2022 Stanislav Popov -
+      <p>Copyright &copy; 2015-2026 Stanislav Popov -
         <span class="credit">Powered by <a target="_blank" href="https://gohugo.io">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/">Hugo-Octopress</a> theme.
       </p>
     </footer>
